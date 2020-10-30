@@ -42,6 +42,12 @@ app.use(
 const habitsController = require('./controllers/habits_controller.js');
 app.use('/habits', habitsController);
 
+const usersController = require('./controllers/users_controller.js');
+app.use('/users', usersController);
+
+const sessionsController = require('./controllers/sessions_controller.js');
+app.use('/sessions', sessionsController);
+
 // ROUTES
 // index
 app.get('/', (req, res) => {
