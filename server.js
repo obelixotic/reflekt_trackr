@@ -38,10 +38,14 @@ app.use(
     })
 );
 
+// CONTROLLERS
+const habitsController = require('./controllers/habits_controller.js');
+app.use('/habits', habitsController);
+
 // ROUTES
 // index
 app.get('/', (req, res) => {
-    res.send('hello');
+    res.redirect('/habits');
 });
 
 // LISTENER
