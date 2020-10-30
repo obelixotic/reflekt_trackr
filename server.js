@@ -7,10 +7,10 @@ const session = require('express-session');
 
 // CONFIGURATIONS
 require('dotenv').config();
-const post = process.env.PORT;
+const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODBURI;
 const app = express();
-mongoose.connection();
+mongoose.connection;
 
 // DATABASE
 mongoose.connect(
@@ -39,6 +39,10 @@ app.use(
 );
 
 // ROUTES
+// index
+app.get('/', (req, res) => {
+    res.send('hello');
+});
 
 // LISTENER
 app.listen(PORT, () => {
