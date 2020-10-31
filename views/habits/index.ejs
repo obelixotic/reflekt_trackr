@@ -8,16 +8,20 @@
 </head>
 
 <body>
-    <a href="/sessions/new">Log in</a>
-    <a href="/users/new">Sign up</a>
     <p>
-        Welcome
+        <h1>
+            Welcome to Reflekt Trackr
+        </h1>
         <% if(currentUser) { %>
             <%= currentUser.username %>!
                 <form action="/sessions?_method=DELETE" method="POST">
                     <input type="submit" value="Log Out" class="btn-small red" />
                 </form>
-                <% } %>
+                <% } else { %>
+                    <a href="/sessions/new">Log in</a>
+                    <a href="/users/new">Sign up</a>
+
+                    <% } %>
     </p>
 
 
