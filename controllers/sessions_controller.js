@@ -4,15 +4,14 @@ const User = require('../models/users_model');
 const sessions = express.Router();
 
 // ROUTES
-// new
+// new session
 sessions.get('/new', (req, res) => {
-    console.log('session/new', req.session.currentUser);
     res.render('sessions/new.ejs', {
         currentUser: req.session.currentUser
     });
 });
 
-// create
+// create session
 sessions.post('/', (req, res) => {
     User.findOne({ username: req.body.username }, (err, foundUser) => {
         console.log(foundUser);
@@ -28,5 +27,13 @@ sessions.post('/', (req, res) => {
         }
     });
 });
+
+// delete session
+sessions.delete('/', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/')
+    });
+});
+
 
 module.exports = sessions;

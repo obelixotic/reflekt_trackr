@@ -13,7 +13,7 @@ const isAuthenticated = (req, res, next) => {
 
 // ROUTES
 // index
-habits.get('/', isAuthenticated, (req, res) => {
+habits.get('/', (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
     res.render('habits/index.ejs', {
         currentUser: req.session.currentUser

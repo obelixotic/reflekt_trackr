@@ -4,13 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Index Page</title>
 </head>
 
 <body>
     <a href="/sessions/new">Log in</a>
-    <a href="/users/new">Sign up</a> Oh Hello
-    <%= currentUser.username %>!
+    <a href="/users/new">Sign up</a>
+    <p>
+        Welcome
+        <% if(currentUser) { %>
+            <%= currentUser.username %>!
+                <form action="/sessions?_method=DELETE" method="POST">
+                    <input type="submit" value="Log Out" class="btn-small red" />
+                </form>
+                <% } %>
+    </p>
 
 
 </body>
