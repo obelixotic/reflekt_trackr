@@ -5,15 +5,15 @@ const habits = express.Router();
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
-        return next()
+        return next();
     } else {
-        res.redirect('/sessions/new')
+        res.redirect('/sessions/new');
     }
-}
+};
 
 // ROUTES
 // index
-habits.get('/', (req, res) => {
+habits.get('/', isAuthenticated, (req, res) => {
     res.send('Hi, to proceed please log in/sign up');
 });
 
