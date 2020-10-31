@@ -1,26 +1,30 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const User = require('../models/users_model');
 const sessions = express.Router();
 
 // ROUTES
 // new
 sessions.get('/new', (req, res) => {
-    // res.send('log in page');
-    res.render('sessions/new.ejs');
+    console.log('session/new', req.session.currentUser);
+    res.render('sessions/new.ejs', {
+        currentUser: req.session.currentUser
+    });
 });
 
 // create
 sessions.post('/', (req, res) => {
-    // res.send(`if valid, user signed in with creds: ${req.body.username}, ${req.body.password}`);
-    console.log(`${req.body.username}, ${req.body.password}`);
     User.findOne({ username: req.body.username }, (err, foundUser) => {
         console.log(foundUser);
-        if (foundUser) {
-            req.session.curentUser = foundUser;
-            res.send(req.session.curentUser);
-        } else {
-            // req.session.curentUser = 'none';
+        if (!foundUser) {
             res.redirect('/sessions/new');
+        } else {
+            if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+                req.session.currentUser = foundUser;
+                res.redirect('/');
+            } else {
+                res.redirect('/sessions/new');
+            }
         }
     });
 });
