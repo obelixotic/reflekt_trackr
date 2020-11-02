@@ -25,9 +25,9 @@ habits.get('/', (req, res) => {
         Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
             let promArray = [];
             for (habit of allHabits) {
-                console.log('habit._id: ', habit._id);
+                // console.log('habit._id: ', habit._id);
                 let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
-                    console.log('habitEntries: ', habitEntries);
+                    // console.log('habitEntries: ', habitEntries);
                 });
                 promArray.push(prom);
             }
@@ -72,7 +72,7 @@ habits.post('/', isAuthenticated, (req, res) => {
             // User.updateOne({ username: req.session.currentUser.username }, { $push: { habits: `ObjectId("${createdHabit['_id']}")` } }, (err, linkCreated) => {
 
             // create default false entries for a week
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 3; i++) {
                 Entry.create({ habit_id: createdHabit['_id'] });
             }
             res.redirect('/habits/');
@@ -84,7 +84,11 @@ habits.post('/', isAuthenticated, (req, res) => {
 // entry
 habits.patch('/:id/entry', (req, res) => {
     // req.body.habit_id = req.params.id;
-    req.body.done = !req.body.done;
+    if (req.body.done === "false") {
+        req.body.done = true;
+    } else {
+        req.body.done = false;
+    }
     console.log(req.body);
     // res.send(req.body);
     Entry.findByIdAndUpdate(req.params.id, { $set: { done: req.body.done } }, (err, result) => {

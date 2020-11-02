@@ -25,12 +25,12 @@
                                 <%= habits[i].name %>
                             </a>
                             <br />
-                            <% for (let j in entries) { %>
+                            <% for (let j=0; j<3; j++) { %>
                                 <form action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
-                                    <input type="submit" value="Done?" class="btn-small" />
+                                    <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
+                                    <input type="submit" value="<%= entries[i][j].done %>" class="btn-small" />
                                 </form>
                                 <% } %>
-                                    <%= entries[i] %>
                         </li>
                         <% } %>
                 </ul>
