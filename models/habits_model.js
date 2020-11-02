@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const habitSchema = new mongoose.Schema({
     name: { type: String, required: true },
     user: { type: String },
-    category: { type: String },
-    done: { type: Boolean }
-}, { timestamps: true });
+    category: { type: String }
+});
 
 const Habit = mongoose.model('Habit', habitSchema);
 
