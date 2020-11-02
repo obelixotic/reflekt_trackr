@@ -33,6 +33,7 @@ habits.get('/new', (req, res) => {
 //create
 habits.post('/', (req, res) => {
     // res.send(req.body);
+    req.body.done = false;
     Habit.create(req.body, (error, createdHabit) => {
         console.log(createdHabit);
         User.updateOne({ username: req.session.currentUser.username }, { $push: { days: `${createdHabit['_id']}` } }, (err, linkCreated) => {
@@ -40,6 +41,10 @@ habits.post('/', (req, res) => {
         });
     });
 });
+
+// THOUGHTS
+// instead of storing entry's _id in users day array, i can save users _id saved in every entry. then i can just look up entry with users _id and sort them by the timestamp to display calender view
+// have a habits collection and save their _ids in users habits array. when user index page loads, find the habit names corresponding to those _id lookups in the habits array of the user and populate the index page
 
 // show
 habits.get('/:id', (req, res) => {
