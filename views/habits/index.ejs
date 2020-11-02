@@ -29,7 +29,11 @@
                             <% for (let j=0; j<3; j++) { %>
                                 <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
                                     <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
-                                    <input type="submit" value="<%= entries[i][j].done %>" class="btn-small" />
+                                    <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
+                                        /assets/check.svg 
+                                    <% } else { %> 
+                                        /assets/cross.svg
+                                    <% } %>" value="<%= entries[i][j].done %>" class="btn-small" />
                                 </form>
                                 <% } %>
                         </li>
