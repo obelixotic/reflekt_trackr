@@ -17,7 +17,7 @@ users.post('/', (req, res) => {
         // req.session.currentUser = undefined; //this to reset the req.session.currentUser else, the index.ejs will show name of the last signed in user, if there is one. *bug*
         // res.redirect('/');
         req.session.destroy(() => {
-            console.log(req.session);
+            // console.log(req.session);
             res.redirect('/')
         });
     });

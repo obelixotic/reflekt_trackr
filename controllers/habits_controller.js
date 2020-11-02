@@ -23,24 +23,38 @@ habits.get('/', (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
     if (req.session.currentUser) {
         Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
+            let promArray = [];
             for (habit of allHabits) {
-                Entry.find({ habit_id: habit._id }, (err, allEntries) => {
-                    res.render('habits/index.ejs', {
-                        habits: allHabits,
-                        currentUser: req.session.currentUser,
-                        // entries: allEntries
-                    });
+                // let allEntries = [];
+                console.log('habit._id: ', habit._id);
+                let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
+                    console.log('habitEntries: ', habitEntries);
                 });
+                promArray.push(prom);
             }
+            Promise.all(promArray).then((allEntries) => {
+                console.log(allEntries);
+                res.render('habits/index.ejs', {
+                    habits: allHabits,
+                    currentUser: req.session.currentUser,
+                    entries: allEntries
+                });
+            });
         });
     } else {
         res.render('habits/index.ejs', {
             habits: '',
             currentUser: '',
-            // entries: ''
+            entries: ''
         });
     }
 });
+// <% for (let entry of entries) { %>
+//     <form action="/habits/<%= entry._id %>/entry?_method=PATCH" method="POST">
+//         <input type="submit" value="done" class="btn-small" />
+//     </form>
+//     <% } %>
+
 
 // new
 habits.get('/new', isAuthenticated, (req, res) => {
@@ -50,10 +64,8 @@ habits.get('/new', isAuthenticated, (req, res) => {
 
 //create
 habits.post('/', isAuthenticated, (req, res) => {
-    // res.send(req.body);
     req.body.done = false;
     req.body.user = req.session.currentUser.username;
-    console.log(req.body);
     Habit.create(req.body, (err, createdHabit) => {
         if (err) {
             console.log(err);
