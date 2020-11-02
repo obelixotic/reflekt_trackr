@@ -14,7 +14,7 @@ sessions.get('/new', (req, res) => {
 // create session
 sessions.post('/', (req, res) => {
     User.findOne({ username: req.body.username }, (err, foundUser) => {
-        console.log(foundUser);
+        // console.log(foundUser);
         if (!foundUser) {
             res.redirect('/sessions/new');
         } else {
