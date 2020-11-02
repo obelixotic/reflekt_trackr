@@ -22,7 +22,8 @@ habits.get('/', (req, res) => {
 
 // new
 habits.get('/new', (req, res) => {
-    res.send('new');
+    // res.send('new');
+    res.render('habits/new.ejs')
 });
 
 //create
