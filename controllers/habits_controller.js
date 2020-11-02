@@ -25,7 +25,6 @@ habits.get('/', (req, res) => {
         Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
             let promArray = [];
             for (habit of allHabits) {
-                // let allEntries = [];
                 console.log('habit._id: ', habit._id);
                 let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
                     console.log('habitEntries: ', habitEntries);
@@ -33,7 +32,6 @@ habits.get('/', (req, res) => {
                 promArray.push(prom);
             }
             Promise.all(promArray).then((allEntries) => {
-                console.log(allEntries);
                 res.render('habits/index.ejs', {
                     habits: allHabits,
                     currentUser: req.session.currentUser,
@@ -85,7 +83,7 @@ habits.post('/', isAuthenticated, (req, res) => {
 
 // entry
 habits.patch('/:id/entry', (req, res) => {
-    req.body.habit_id = req.params.id;
+    // req.body.habit_id = req.params.id;
     req.body.done = !req.body.done;
     console.log(req.body);
     // res.send(req.body);

@@ -19,12 +19,18 @@
                 </form>
                 <a href="/habits/new">Add habit to track</a>
                 <ul>
-                    <% for (let habit of habits ) { %>
+                    <% for (let i in habits ) { %>
                         <li>
-                            <a href="/habits/<%=habit._id%>">
-                                <%= habit.name %>
+                            <a href="/habits/<%=habits[i]._id%>">
+                                <%= habits[i].name %>
                             </a>
-                            <%= entries %>
+                            <br />
+                            <% for (let j in entries) { %>
+                                <form action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
+                                    <input type="submit" value="Done?" class="btn-small" />
+                                </form>
+                                <% } %>
+                                    <%= entries[i] %>
                         </li>
                         <% } %>
                 </ul>
