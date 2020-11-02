@@ -18,6 +18,15 @@
                     <input type="submit" value="Log Out" class="btn-small red" />
                 </form>
                 <a href="/habits/new">Add habit to track</a>
+                <ul>
+                    <% for (let habit of habits ) { %>
+                        <li>
+                            <a href="/habits/<%=habit._id%>">
+                                <%= habit.name %>
+                        </li>
+                        <% } %>
+                </ul>
+
                 <% } else { %>
                     <a href="/sessions/new">Log in</a>
                     <a href="/users/new">Sign up</a>

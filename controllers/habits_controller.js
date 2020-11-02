@@ -1,5 +1,6 @@
 const express = require('express');
 const Habit = require('../models/habits_model.js');
+const User = require('../models/users_model.js');
 const habits = express.Router();
 
 // MIDDLEWARE
@@ -15,8 +16,11 @@ const isAuthenticated = (req, res, next) => {
 // index
 habits.get('/', (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
-    res.render('habits/index.ejs', {
-        currentUser: req.session.currentUser
+    Habit.find({}, (err, allHabits) => {
+        res.render('habits/index.ejs', {
+            habits: allHabits,
+            currentUser: req.session.currentUser
+        });
     });
 });
 
@@ -28,7 +32,13 @@ habits.get('/new', (req, res) => {
 
 //create
 habits.post('/', (req, res) => {
-    res.send(req.body);
+    // res.send(req.body);
+    Habit.create(req.body, (error, createdHabit) => {
+        console.log(createdHabit);
+        User.updateOne({ username: req.session.currentUser.username }, { $push: { days: `${createdHabit['_id']}` } }, (err, linkCreated) => {
+            res.redirect('/habits/');
+        });
+    });
 });
 
 // show
