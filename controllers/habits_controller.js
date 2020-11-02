@@ -5,6 +5,7 @@
 const express = require('express');
 const Habit = require('../models/habits_model.js');
 const User = require('../models/users_model.js');
+const Entry = require('../models/entries_model.js');
 const habits = express.Router();
 
 // MIDDLEWARE
@@ -36,13 +37,13 @@ habits.get('/', (req, res) => {
 });
 
 // new
-habits.get('/new', (req, res) => {
+habits.get('/new', isAuthenticated, (req, res) => {
     // res.send('new');
     res.render('habits/new.ejs')
 });
 
 //create
-habits.post('/', (req, res) => {
+habits.post('/', isAuthenticated, (req, res) => {
     // res.send(req.body);
     req.body.done = false;
     req.body.user = req.session.currentUser.username;
@@ -53,10 +54,23 @@ habits.post('/', (req, res) => {
         } else {
             console.log(createdHabit);
             // User.updateOne({ username: req.session.currentUser.username }, { $push: { habits: `ObjectId("${createdHabit['_id']}")` } }, (err, linkCreated) => {
+
+            // create default false entries for a week
+            Entry.create({ habit_id: createdHabit['_id'] });
+
             res.redirect('/habits/');
             // });
         }
     });
+});
+
+// entry
+habits.patch('/:id/entry', (req, res) => {
+    req.body.habit_id = req.params.id;
+    req.body.done = true;
+    console.log(req.body);
+    res.send(req.body);
+    // Entry.create(req.body)
 });
 
 // show
