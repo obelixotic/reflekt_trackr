@@ -23,15 +23,21 @@ habits.get('/', (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
     if (req.session.currentUser) {
         Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
-            res.render('habits/index.ejs', {
-                habits: allHabits,
-                currentUser: req.session.currentUser
-            });
+            for (habit of allHabits) {
+                Entry.find({ habit_id: habit._id }, (err, allEntries) => {
+                    res.render('habits/index.ejs', {
+                        habits: allHabits,
+                        currentUser: req.session.currentUser,
+                        // entries: allEntries
+                    });
+                });
+            }
         });
     } else {
         res.render('habits/index.ejs', {
             habits: '',
-            currentUser: ''
+            currentUser: '',
+            // entries: ''
         });
     }
 });
@@ -56,8 +62,9 @@ habits.post('/', isAuthenticated, (req, res) => {
             // User.updateOne({ username: req.session.currentUser.username }, { $push: { habits: `ObjectId("${createdHabit['_id']}")` } }, (err, linkCreated) => {
 
             // create default false entries for a week
-            Entry.create({ habit_id: createdHabit['_id'] });
-
+            for (let i = 0; i < 5; i++) {
+                Entry.create({ habit_id: createdHabit['_id'] });
+            }
             res.redirect('/habits/');
             // });
         }
@@ -67,11 +74,20 @@ habits.post('/', isAuthenticated, (req, res) => {
 // entry
 habits.patch('/:id/entry', (req, res) => {
     req.body.habit_id = req.params.id;
-    req.body.done = true;
+    req.body.done = !req.body.done;
     console.log(req.body);
-    res.send(req.body);
-    // Entry.create(req.body)
+    // res.send(req.body);
+    Entry.findByIdAndUpdate(req.params.id, { $set: { done: req.body.done } }, (err, result) => {
+        res.redirect('/habits/');
+    });
 });
+
+// router.patch('/:id', (req, res) => {
+//     Product.findByIdAndUpdate(req.params.id, { $inc: { 'qty': -1 } }, (err, result) => {
+//         res.redirect(`/products/${req.params.id}`);
+//     });
+// });
+
 
 // show
 habits.get('/:id', (req, res) => {
