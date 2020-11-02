@@ -1,0 +1,22 @@
+body {
+    /* background-color: red; */
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 20px 0;
+}
+
+li a {
+    width: 120px;
+}
+
+.entries {
+    margin: 0 30px;
+}
+
+.entries input[type="submit"] {
+    width: 50px;
+}
