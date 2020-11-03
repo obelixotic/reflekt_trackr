@@ -13,35 +13,42 @@
         <%- include ('../partials/nav.ejs') %>
     </nav>
     <div class="container">
-        <div class="heading-bar">
-            <h2 class="page-heading">
-                Habits
-            </h2>
-            <form class="add-habit" action="/habits/new" method="GET">
-                <input type="image" alt="submit" src="/assets/plus-thin.svg" />
-            </form>
-        </div>
+        <% if (currentUser) { %>
+            <div class="heading-bar">
+                <h2 class="page-heading">
+                    HABITS
+                </h2>
+                <form class="add-habit" action="/habits/new" method="GET">
+                    <input type="image" alt="submit" src="/assets/plus-white.svg" />
+                </form>
+            </div>
 
-        <ul>
-            <% for (let i in habits ) { %>
-                <li>
-                    <a href="/habits/<%=habits[i]._id%>">
-                        <%= habits[i].name %>
-                    </a>
-                    <br />
-                    <% for (let j=0; j<7; j++) { %>
-                        <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
-                            <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
-                            <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
+            <ul>
+                <% for (let i in habits ) { %>
+                    <li>
+                        <a href="/habits/<%=habits[i]._id%>">
+                            <%= habits[i].name %>
+                        </a>
+                        <br />
+                        <% for (let j=0; j<7; j++) { %>
+                            <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
+                                <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
+                                <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
                                         /assets/check.svg 
                                     <% } else { %> 
-                                        /assets/cross.svg" style="opacity:0.1
+                                        /assets/cross.svg" style="width:10px;opacity:0.1
                                     <% } %>" value="<%= entries[i][j].done %>" class="btn-small" />
-                        </form>
-                        <% } %>
-                </li>
+                            </form>
+                            <% } %>
+                    </li>
+                    <% } %>
+            </ul>
+            <% } else { %>
+                <div class="catch-phrase">
+                    BUILD <br /> BETTER <br /> HABITS
+                </div>
                 <% } %>
-        </ul>
+
     </div>
 </body>
 

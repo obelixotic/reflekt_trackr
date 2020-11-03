@@ -50,7 +50,11 @@ a:visited {
 .add-habit {
     width: 20px;
     align-self: center;
-    margin-right: 25px;
+    margin-right: 20px;
+}
+
+.add-habit input[type=image] {
+    width: 15px;
 }
 
 nav {
@@ -59,7 +63,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     /* background-color: salmon; */
-    background-color: #005946;
+    background-color: #12b482;
     height: 60px;
 }
 
@@ -102,18 +106,25 @@ nav {
 
 .page-heading {
     margin-left: 20px;
+    color: white;
+    font-size: 15px;
 }
 
 .auth-links {
     display: flex;
+    font-size: 13px;
 }
 
-.sign-up {
+.log-in {
     margin-right: 10px;
     color: white;
 }
 
-.log-in {
+#log-in {
+    margin-right: -4px;
+}
+
+.sign-up {
     margin-right: 20px;
     color: white;
 }
@@ -123,13 +134,26 @@ nav {
     color: white;
 }
 
-.log-out input {
+.auth-links input {
     height: 36px;
     width: 70px;
     /* background-color: brown; */
-    background-color: #068061;
+    background-color: #12b482;
     color: white;
     /* border-radius: 4px; */
     border: none;
-    border: 1px solid #00332a;
+    /* border: 1px solid white; */
+    margin-right: 14px;
+}
+
+.catch-phrase {
+    line-height: 34px;
+    font-size: 20px;
+    color: grey;
+    text-align: center;
+    margin-top: 210px
+}
+
+.container {
+    background-color: #fbfff5;
 }
