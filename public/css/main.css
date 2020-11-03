@@ -49,6 +49,10 @@ a {
     cursor: pointer;
 }
 
+input[type=submit] {
+    cursor: pointer;
+}
+
 a:visited {
     /* color: rgb(72, 9, 145); */
     color: rgba(10, 10, 10, 0.9);
