@@ -9,49 +9,40 @@
 </head>
 
 <body>
-    <p>
-        <h1>
-            Welcome to Reflekt Trackr
-        </h1>
-        <% if(currentUser) { %>
-            <%= currentUser.username %>!
-                <form action="/sessions?_method=DELETE" method="POST">
-                    <input type="submit" value="Log Out" class="btn-small red" />
-                </form>
-                <form class="add-habit" action="/habits/new" method="GET">
-                    <input type="image" alt="submit" src="/assets/plus.svg" />
-                </form>
+    <nav>
+        <%- include ('../partials/nav.ejs') %>
+    </nav>
+    <div class="container">
+        <div class="heading-bar">
+            <h2 class="page-heading">
+                Habits
+            </h2>
+            <form class="add-habit" action="/habits/new" method="GET">
+                <input type="image" alt="submit" src="/assets/plus-thin.svg" />
+            </form>
+        </div>
 
-                <!-- <a href="/habits/new">Add habit to track</a> -->
-                <ul>
-                    <% for (let i in habits ) { %>
-                        <li>
-                            <a href="/habits/<%=habits[i]._id%>">
-                                <%= habits[i].name %>
-                            </a>
-                            <br />
-                            <% for (let j=0; j<7; j++) { %>
-                                <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
-                                    <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
-                                    <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
+        <ul>
+            <% for (let i in habits ) { %>
+                <li>
+                    <a href="/habits/<%=habits[i]._id%>">
+                        <%= habits[i].name %>
+                    </a>
+                    <br />
+                    <% for (let j=0; j<7; j++) { %>
+                        <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
+                            <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
+                            <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
                                         /assets/check.svg 
                                     <% } else { %> 
                                         /assets/cross.svg" style="opacity:0.1
                                     <% } %>" value="<%= entries[i][j].done %>" class="btn-small" />
-                                </form>
-                                <% } %>
-                        </li>
+                        </form>
                         <% } %>
-                </ul>
-
-                <% } else { %>
-                    <a href="/sessions/new">Log in</a>
-                    <a href="/users/new">Sign up</a>
-
-                    <% } %>
-    </p>
-
-
+                </li>
+                <% } %>
+        </ul>
+    </div>
 </body>
 
 </html>
