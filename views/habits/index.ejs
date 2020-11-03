@@ -2,11 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/main.css">
-    <title>Index Page</title>
+    <%- include ('../partials/head.ejs') %>
 </head>
+
 
 <body>
     <nav>
@@ -28,13 +26,13 @@
                     <% if(i==0) { %>
                         <li class="days">
                             <a></a>
-                            <div>S</div>
-                            <div>M</div>
-                            <div>T</div>
-                            <div>W</div>
-                            <div>T</div>
-                            <div>F</div>
-                            <div>S</div>
+                            <div class="day-letter">S</div>
+                            <div class="day-letter">M</div>
+                            <div class="day-letter">T</div>
+                            <div class="day-letter">W</div>
+                            <div class="day-letter">T</div>
+                            <div class="day-letter">F</div>
+                            <div class="day-letter">S</div>
                         </li>
                         <% } %>
 

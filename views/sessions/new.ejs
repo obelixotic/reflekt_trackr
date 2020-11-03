@@ -2,22 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in page</title>
+    <%- include ('../partials/head.ejs') %>
 </head>
 
 <body>
-    <h1>Log in</h1>
-    <form action="/sessions" method="POST">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" />
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
-        <input type="submit" value="Submit">
-    </form>
-    <a href="/users/new">Sign up</a>
-
+    <nav>
+        <%- include ('../partials/nav.ejs') %>
+    </nav>
+    <div class="container">
+        <div class="heading-bar">
+            <h2 class="page-heading">USER LOGIN </h2>
+        </div>
+        <form class="auth-form" action="/sessions" method="POST">
+            <%- include ('../partials/form.ejs') %>
+        </form>
+    </div>
 </body>
 
 </html>

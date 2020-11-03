@@ -35,7 +35,8 @@ habits.get('/', (req, res) => {
                 res.render('habits/index.ejs', {
                     habits: allHabits,
                     currentUser: req.session.currentUser,
-                    entries: allEntries
+                    entries: allEntries,
+                    tabTitle: 'Home'
                 });
             });
         });
@@ -43,7 +44,8 @@ habits.get('/', (req, res) => {
         res.render('habits/index.ejs', {
             habits: '',
             currentUser: '',
-            entries: ''
+            entries: '',
+            tabTitle: 'Home'
         });
     }
 });

@@ -1,4 +1,4 @@
-<div class="nav-right">
+<div class="nav-bar">
     <% if (currentUser) { %>
         <h1 class="welcome">Hi
             <%= currentUser.username.toLowerCase().charAt(0).toUpperCase() + currentUser.username.slice(1) %>!
@@ -8,23 +8,30 @@
                 <input type="submit" value="LOGOUT" class="btn-small red" />
             </form>
         </div>
-        <% } else { %>
+        <% } else if (tabTitle == 'Login'){ %>
             <h1 class="brand-logo">Reflekt</h1>
             <div class="auth-links">
-                <form action="/sessions/new" method="GET">
-                    <input id="log-in" type="submit" value="LOGIN" class="btn-small" />
-                </form>
                 <form action="/users/new" method="GET">
-                    <input type="submit" value="SIGNUP" class="btn-small" />
+                    <input id="sign-up" type="submit" value="SIGNUP" class="btn-small" />
                 </form>
-
-                <!-- <div class="log-in"><a id="log-in" href="/sessions/new">LOGIN</a></div>
-                <div class="sign-up"><a id="sign-up" href="/users/new">SIGNUP</a></div> -->
             </div>
-            <!-- <div class="catch-phrase">
-                Record<br /> Reflect
-                <br /> Record
-                <br />
-            </div> -->
-            <% } %>
+            <% } else if (tabTitle == 'Signup') { %>
+                <h1 class="brand-logo">Reflekt</h1>
+                <div class="auth-links">
+                    <form action="/sessions/new" method="GET">
+                        <input id="log-in" type="submit" value="LOGIN" class="btn-small" />
+                    </form>
+                </div>
+                <% } else { %>
+                    <h1 class="brand-logo">Reflekt</h1>
+                    <div class="auth-links">
+                        <form action="/sessions/new" method="GET">
+                            <input id="log-in" type="submit" value="LOGIN" class="btn-small" />
+                        </form>
+                        <form action="/users/new" method="GET">
+                            <input id="sign-up" type="submit" value="SIGNUP" class="btn-small" />
+                        </form>
+
+                    </div>
+                    <% } %>
 </div>
