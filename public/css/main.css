@@ -42,12 +42,13 @@ li a {
 a {
     text-decoration: none;
     /* color: rgb(72, 9, 145); */
-    color: rgba(10, 10, 10, 0.3);
+    color: rgba(10, 10, 10, 0.9);
     cursor: pointer;
 }
 
 a:visited {
-    color: rgb(72, 9, 145);
+    /* color: rgb(72, 9, 145); */
+    color: rgba(10, 10, 10, 0.9);
 }
 
 .add-habit {
@@ -164,13 +165,15 @@ nav {
 }
 
 .days {
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 8px;
-    border-bottom: 1px solid rgba(100, 100, 100, 0.5);
+    /* border-bottom: 1px solid rgba(100, 100, 100, 0.5); */
+    border: none;
+    margin-bottom: -12px;
 }
 
 li div {
     position: relative;
-    left: -14px;
+    left: -13px;
     margin-left: -8px;
 }
