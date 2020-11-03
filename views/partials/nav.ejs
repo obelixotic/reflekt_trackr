@@ -1,18 +1,18 @@
 <div class="nav-right">
     <% if (currentUser) { %>
-        <h1 class="welcome">Welcome
-            <%= currentUser.username %>
+        <h1 class="welcome">Hi
+            <%= currentUser.username.toLowerCase().charAt(0).toUpperCase() + currentUser.username.slice(1) %>!
         </h1>
         <div class="log-out">
             <form action="/sessions?_method=DELETE" method="POST">
-                <input type="submit" value="Log Out" class="btn-small red" />
+                <input type="submit" value="Log out" class="btn-small red" />
             </form>
         </div>
         <% } else { %>
             <h1 class="brand-logo">Reflekt</h1>
             <div class="auth-links">
-                <div class="sign-up"><a href="/users/new">Sign Up</a></div>
-                <div class="log-in"><a href="/sessions/new">Log In</a></div>
+                <div class="sign-up"><a id="sign-up" href="/users/new">Sign Up</a></div>
+                <div class="log-in"><a id="log-in" href="/sessions/new">Log in</a></div>
             </div>
             <% } %>
 </div>
