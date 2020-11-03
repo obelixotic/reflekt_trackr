@@ -72,7 +72,7 @@ habits.post('/', isAuthenticated, (req, res) => {
             // User.updateOne({ username: req.session.currentUser.username }, { $push: { habits: `ObjectId("${createdHabit['_id']}")` } }, (err, linkCreated) => {
 
             // create default false entries for a week
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 7; i++) {
                 Entry.create({ habit_id: createdHabit['_id'] });
             }
             res.redirect('/habits/');

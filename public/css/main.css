@@ -6,7 +6,7 @@ li {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin: 20px 0;
+    margin: 20px -40px;
 }
 
 li a {
@@ -14,12 +14,32 @@ li a {
 }
 
 .entries {
-    margin: 0 30px;
+    margin: 0 8px;
 }
 
 .entries input[type=image] {
-    width: 20px;
+    width: 16px;
 }
+
+a {
+    text-decoration: none;
+    color: rgb(72, 9, 145);
+    cursor: pointer;
+}
+
+a:visited {
+    color: rgb(72, 9, 145);
+}
+
+.add-habit {
+    width: 20px;
+    /* temp for now */
+    margin-left: 316px;
+    margin-bottom: 40px;
+}
+
+
+/* a:hover {} */
 
 
 /* input[type=submit] {

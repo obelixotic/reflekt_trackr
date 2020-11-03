@@ -18,7 +18,11 @@
                 <form action="/sessions?_method=DELETE" method="POST">
                     <input type="submit" value="Log Out" class="btn-small red" />
                 </form>
-                <a href="/habits/new">Add habit to track</a>
+                <form class="add-habit" action="/habits/new" method="GET">
+                    <input type="image" alt="submit" src="/assets/plus.svg" />
+                </form>
+
+                <!-- <a href="/habits/new">Add habit to track</a> -->
                 <ul>
                     <% for (let i in habits ) { %>
                         <li>
@@ -26,7 +30,7 @@
                                 <%= habits[i].name %>
                             </a>
                             <br />
-                            <% for (let j=0; j<3; j++) { %>
+                            <% for (let j=0; j<7; j++) { %>
                                 <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
                                     <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
                                     <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
