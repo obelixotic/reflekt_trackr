@@ -2,20 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add new habit page</title>
+    <%- include ('../partials/head.ejs') %>
 </head>
 
 <body>
-    <h1>Add new habit to track</h1>
-    <form action="/habits/" method="POST">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" />
-        <label for="category">Category</label>
-        <input type="category" name="category" id="category" />
-        <input type="submit" value="Submit">
-    </form>
+    <nav>
+        <%- include ('../partials/nav.ejs') %>
+    </nav>
+    <div class="container">
+        <div class="heading-bar">
+            <h2 class="page-heading">CREATE NEW HABIT </h2>
+        </div>
+        <form class="auth-form" action="/habits/" method="POST">
+            <p>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" />
+            </p>
+            <p>
+                <label for="category">Category</label>
+                <input type="category" name="category" id="category" />
+            </p>
+            <input type="submit" value="CREATE"> </form>
+    </div>
 </body>
 
 </html>

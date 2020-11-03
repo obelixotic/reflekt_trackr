@@ -59,7 +59,10 @@ habits.get('/', (req, res) => {
 // new
 habits.get('/new', isAuthenticated, (req, res) => {
     // res.send('new');
-    res.render('habits/new.ejs')
+    res.render('habits/new.ejs', {
+        tabTitle: 'New habit',
+        currentUser: req.session.currentUser
+    })
 });
 
 //create
