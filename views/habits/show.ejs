@@ -35,7 +35,7 @@
             </li>
         </ul>
         <ul class="cal-view">
-            <% for (let i=0; i<16; i++) { %>
+            <% for (let i=0; i<entries.length/7; i++) { %>
                 <li class="cal-rows">
                     <a class="cal-week-label">WEEK <%= i+1 %></a>
                     <br />
@@ -50,7 +50,8 @@
                 <% } %>
 
         </ul>
-        <%= entries %>
+        <%= entries.length %>
+            <%= entries %>
     </div>
 </body>
 
