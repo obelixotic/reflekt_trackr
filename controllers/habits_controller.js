@@ -8,6 +8,7 @@ const User = require('../models/users_model.js');
 const Entry = require('../models/entries_model.js');
 const habits = express.Router();
 const getDay = require('date-fns/getDay');
+const getDate = require('date-fns/getDate');
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
@@ -67,6 +68,8 @@ habits.post('/', isAuthenticated, (req, res) => {
     req.body.done = false;
     req.body.user = req.session.currentUser.username;
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
+    req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
+    // req.body.date = Date.now();
     Habit.create(req.body, (err, createdHabit) => {
         if (err) {
             console.log(err);
@@ -74,12 +77,20 @@ habits.post('/', isAuthenticated, (req, res) => {
             console.log(createdHabit);
             // User.updateOne({ username: req.session.currentUser.username }, { $push: { habits: `ObjectId("${createdHabit['_id']}")` } }, (err, linkCreated) => {
 
+            // adding dates to each entry
+            let creationDay = getDay(Date.now());
+            let creationDate = getDate(Date.now());
+            console.log(creationDay, creationDate);
+
             // create default false entries for a week
+            let promArray = [];
             for (let i = 0; i < 7; i++) {
-                Entry.create({ habit_id: createdHabit['_id'] });
+                let prom = Entry.create({ habit_id: createdHabit['_id'] });
+                promArray.push(prom);
             }
-            res.redirect('/habits/');
-            // });
+            Promise.all(promArray).then((allEntries) => {
+                res.redirect('/habits/');
+            });
         }
     });
 });
@@ -128,15 +139,22 @@ habits.get('/:id/edit', (req, res) => {
 
 // update
 habits.put('/:id', (req, res) => {
-    res.send(`update ${req.params.id}`);
-    // Entry.findByIdAndUpdate(req.params.id, { $set: { done: req.body.done } }, (err, result) => {
-    //     res.redirect('/habits/');
-    // });
+    // console.log(req.body);
+    // res.send(`update ${req.params.id}`);
+    req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
+    req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
+
+    Habit.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, category: req.body.category } }, (err, result) => {
+        res.redirect(`/habits/${req.params.id}`);
+    });
 });
 
 // delete
 habits.delete('/:id', (req, res) => {
-    res.send(`delete ${req.params.id}`);
+    // res.send(`delete ${req.params.id}`);
+    Habit.findByIdAndDelete(req.params.id, (err, deleted) => {
+        res.redirect('/habits');
+    });
 });
 
 module.exports = habits;
