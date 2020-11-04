@@ -17,30 +17,28 @@
             <%- include ('../partials/back.ejs') %>
         </div>
         <ul>
+            <li class="days">
+                <a class="day-heading">WEEK</a>
+                <br/>
+                <div class="day-letter">S</div>
+                <div class="day-letter">M</div>
+                <div class="day-letter">T</div>
+                <div class="day-letter">W</div>
+                <div class="day-letter">T</div>
+                <div class="day-letter">F</div>
+                <div class="day-letter">S</div>
+            </li>
+        </ul>
+        <ul class="cal-view">
             <% for (let i=0; i<16; i++) { %>
-                <% if(i==0) { %>
-                    <li class="days">
-                        <a class="day-heading">HABITS</a>
-                        <br/>
-                        <div class="day-letter">S</div>
-                        <div class="day-letter">M</div>
-                        <div class="day-letter">T</div>
-                        <div class="day-letter">W</div>
-                        <div class="day-letter">T</div>
-                        <div class="day-letter">F</div>
-                        <div class="day-letter">S</div>
-                    </li>
-                    <% } %>
-                        <li class="cal-rows <% if(i==0) { %>
-                            cal-row1
-                        <% } %> ">
-                            <a class="cal-week-label">WEEK <%= i+1 %></a>
-                            <br />
-                            <% for (let j=0; j<7; j++) { %>
-                                <div class="cal-days"></div>
-                                <% } %>
-                        </li>
+                <li class="cal-rows">
+                    <a class="cal-week-label">WEEK <%= i+1 %></a>
+                    <br />
+                    <% for (let j=0; j<7; j++) { %>
+                        <div class="cal-days"></div>
                         <% } %>
+                </li>
+                <% } %>
 
         </ul>
     </div>

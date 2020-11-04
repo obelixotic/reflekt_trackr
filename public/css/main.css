@@ -229,6 +229,11 @@ li div {
     margin: 0;
 }
 
+.cal-view {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
 .cal-days {
     border: 1px solid red;
     width: 20px;

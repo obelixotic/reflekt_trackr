@@ -22,6 +22,7 @@ const isAuthenticated = (req, res, next) => {
 habits.get('/', (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
     if (req.session.currentUser) {
+        // if authenticated
         Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
             let promArray = [];
             for (habit of allHabits) {
@@ -41,6 +42,7 @@ habits.get('/', (req, res) => {
             });
         });
     } else {
+        // if not authenticated
         res.render('habits/index.ejs', {
             habits: '',
             currentUser: '',
