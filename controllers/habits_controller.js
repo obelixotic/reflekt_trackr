@@ -9,6 +9,7 @@ const Entry = require('../models/entries_model.js');
 const habits = express.Router();
 const getDay = require('date-fns/getDay');
 const getDate = require('date-fns/getDate');
+const subDays = require('date-fns/subDays');
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
@@ -35,10 +36,16 @@ habits.get('/', (req, res) => {
                 promArray.push(prom);
             }
             Promise.all(promArray).then((allEntries) => {
+                let weeksEntries = []
+                for (entries of allEntries) {
+                    entries = entries.slice(entries.length - 7);
+                    weeksEntries.push(entries)
+                }
+                console.log(weeksEntries);
                 res.render('habits/index.ejs', {
                     habits: allHabits,
                     currentUser: req.session.currentUser,
-                    entries: allEntries,
+                    entries: weeksEntries,
                     tabTitle: 'Home'
                 });
             });
@@ -69,7 +76,7 @@ habits.post('/', isAuthenticated, (req, res) => {
     req.body.user = req.session.currentUser.username;
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
     req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
-    // req.body.date = Date.now();
+    req.body.date = Date.now();
     Habit.create(req.body, (err, createdHabit) => {
         if (err) {
             console.log(err);
@@ -78,14 +85,17 @@ habits.post('/', isAuthenticated, (req, res) => {
             // User.updateOne({ username: req.session.currentUser.username }, { $push: { habits: `ObjectId("${createdHabit['_id']}")` } }, (err, linkCreated) => {
 
             // adding dates to each entry
-            let creationDay = getDay(Date.now());
-            let creationDate = getDate(Date.now());
-            console.log(creationDay, creationDate);
+            let creationDate = Date.now();
+            let creationDayOfWeek = getDay(creationDate);
+            let creationDateOfMonth = getDate(creationDate);
 
             // create default false entries for a week
             let promArray = [];
             for (let i = 0; i < 7; i++) {
-                let prom = Entry.create({ habit_id: createdHabit['_id'] });
+                let diff = i - creationDayOfWeek;
+                let entryDate = subDays(creationDate, diff);
+                console.log(entryDate);
+                let prom = Entry.create({ habit_id: createdHabit['_id'], date: entryDate });
                 promArray.push(prom);
             }
             Promise.all(promArray).then((allEntries) => {
