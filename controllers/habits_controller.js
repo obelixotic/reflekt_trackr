@@ -49,12 +49,6 @@ habits.get('/', (req, res) => {
         });
     }
 });
-// <% for (let entry of entries) { %>
-//     <form action="/habits/<%= entry._id %>/entry?_method=PATCH" method="POST">
-//         <input type="submit" value="done" class="btn-small" />
-//     </form>
-//     <% } %>
-
 
 // new
 habits.get('/new', isAuthenticated, (req, res) => {
@@ -62,7 +56,7 @@ habits.get('/new', isAuthenticated, (req, res) => {
     res.render('habits/new.ejs', {
         tabTitle: 'New habit',
         currentUser: req.session.currentUser
-    })
+    });
 });
 
 //create
@@ -86,7 +80,7 @@ habits.post('/', isAuthenticated, (req, res) => {
     });
 });
 
-// entry
+// make a daily entry
 habits.patch('/:id/entry', (req, res) => {
     // req.body.habit_id = req.params.id;
     if (req.body.done === "false") {
@@ -101,16 +95,16 @@ habits.patch('/:id/entry', (req, res) => {
     });
 });
 
-// router.patch('/:id', (req, res) => {
-//     Product.findByIdAndUpdate(req.params.id, { $inc: { 'qty': -1 } }, (err, result) => {
-//         res.redirect(`/products/${req.params.id}`);
-//     });
-// });
-
-
 // show
 habits.get('/:id', (req, res) => {
-    res.send(`show ${req.params.id}`);
+    // res.send(`show ${req.params.id}`);
+    Habit.findById(req.params.id, (err, foundHabit) => {
+        res.render('habits/show.ejs', {
+            tabTitle: foundHabit.name,
+            currentUser: req.session.currentUser,
+            habit: foundHabit
+        });
+    });
 });
 
 // edit

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head.ejs') %>
+</head>
+
+<body>
+    <nav>
+        <%- include ('../partials/nav.ejs') %>
+    </nav>
+    <div class="container">
+        <div class="heading-bar">
+            <h2 class="page-heading">
+                <%= habit.name %>
+            </h2>
+            <%- include ('../partials/back.ejs') %>
+        </div>
+        <ul>
+            <% for (let i=0; i<16; i++) { %>
+                <% if(i==0) { %>
+                    <li class="days">
+                        <a class="day-heading">HABITS</a>
+                        <br/>
+                        <div class="day-letter">S</div>
+                        <div class="day-letter">M</div>
+                        <div class="day-letter">T</div>
+                        <div class="day-letter">W</div>
+                        <div class="day-letter">T</div>
+                        <div class="day-letter">F</div>
+                        <div class="day-letter">S</div>
+                    </li>
+                    <% } %>
+
+                        <li class="cal-rows">
+                            <a class="cal-week-label">WEEK <%= i+1 %></a>
+                            <br />
+                            <% for (let j=0; j<7; j++) { %>
+                                <div class="cal-days"></div>
+                                <% } %>
+                        </li>
+                        <% } %>
+
+        </ul>
+    </div>
+</body>
+
+</html>

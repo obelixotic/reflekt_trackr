@@ -3,6 +3,7 @@
         <h1 class="welcome">Hi
             <%= currentUser.username.toLowerCase().charAt(0).toUpperCase() + currentUser.username.slice(1) %>!
         </h1>
+        <!-- <h1 class="brand-logo">Reflekt</h1> -->
         <div class="auth-links">
             <form action="/sessions?_method=DELETE" method="POST">
                 <input type="submit" value="LOGOUT" class="btn-small red" />

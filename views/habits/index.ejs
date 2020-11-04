@@ -14,7 +14,7 @@
         <% if (currentUser) { %>
             <div class="heading-bar">
                 <h2 class="page-heading">
-                    HABITS
+                    MY WEEKLY TRACKER
                 </h2>
                 <form class="add-habit" action="/habits/new" method="GET">
                     <input type="image" alt="submit" src="/assets/plus-white.svg" />
@@ -25,7 +25,7 @@
                 <% for (let i in habits ) { %>
                     <% if(i==0) { %>
                         <li class="days">
-                            <a></a>
+                            <a class="day-heading">HABITS</a>
                             <br/>
                             <div class="day-letter">S</div>
                             <div class="day-letter">M</div>

@@ -223,3 +223,23 @@ li div {
     border-radius: 23%;
     margin-left: 9px;
 }
+
+.day-heading {
+    color: white;
+    margin: 0;
+}
+
+.cal-days {
+    border: 1px solid red;
+    width: 20px;
+    height: 20px;
+}
+
+.cal-week-label {
+    color: rgba(10, 10, 10, 0.9);
+    margin: 0;
+}
+
+.cal-rows {
+    padding-top: 6px;
+}
