@@ -39,8 +39,8 @@
                 <li class="cal-rows">
                     <a class="cal-week-label">WEEK <%= i+1 %></a>
                     <br />
-                    <% for (let entry of entries) { %>
-                        <%if (entry.done === true) { %>
+                    <% for (let j=0; j<7; j++) { %>
+                        <%if (entries[j + (7*i)].done === true) { %>
                             <div class="cal-days" style="background-color:red"></div>
                             <% } else { %>
                                 <div class="cal-days"></div>
