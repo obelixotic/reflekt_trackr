@@ -12,7 +12,9 @@
     <div class="container">
         <div class="heading-bar">
             <h2 class="page-heading">EDIT HABIT </h2>
-            <%- include ('../partials/back.ejs') %>
+            <form class="add-habit" action="/habits/<%= id %>/" method="GET">
+                <input type="image" alt="submit" src="/assets/back-curve-white.svg" />
+            </form>
         </div>
         <form class="auth-form" action="/habits/<%= id %>/?_method=PUT" method="POST">
             <p>
