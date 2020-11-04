@@ -11,9 +11,7 @@
     </nav>
     <div class="container">
         <div class="heading-bar">
-            <h2 class="page-heading">
-                <%= habit.name.toUpperCase() %>
-            </h2>
+            <h2 class="page-heading">CALENDAR VIEW</h2>
             <div class="icons">
                 <form class="add-habit" action="/habits/<%= id %>/edit" method="GET">
                     <input id="edit" type="image" alt="submit" src="/assets/edit-white.svg" />
@@ -23,7 +21,9 @@
         </div>
         <ul>
             <li class="days">
-                <a class="day-heading">WEEK</a>
+                <a class="day-heading">
+                    <%= habit.name.toUpperCase() %>
+                </a>
                 <br/>
                 <div class="day-letter">S</div>
                 <div class="day-letter">M</div>
@@ -43,7 +43,7 @@
                     <br />
                     <% for (let j=0; j<7; j++) { %>
                         <%if (entries[j + (7*i)].done === true) { %>
-                            <div class="cal-days" style="background-color:rgba(10,10,10,0.4)"></div>
+                            <div class="cal-days" style="background-color:rgba(200,10,10,0.5)"></div>
                             <% } else { %>
                                 <div class="cal-days"></div>
                                 <% } %>

@@ -236,7 +236,7 @@ li div {
 }
 
 .cal-days {
-    border: 1px solid rgba(10, 10, 10, 0.9);
+    border: 1px solid rgba(100, 10, 10, 0.1);
     width: 20px;
     height: 20px;
 }
@@ -280,3 +280,9 @@ li div {
     position: relative;
     left: 4px;
 }
+
+
+/* .day-heading h3 {
+    margin: 0;
+    font-size: 16px;
+} */

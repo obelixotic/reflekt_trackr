@@ -11,6 +11,7 @@ const getDay = require('date-fns/getDay');
 const getDate = require('date-fns/getDate');
 const subDays = require('date-fns/subDays');
 const isSameWeek = require('date-fns/isSameWeek');
+const getMonth = require('date-fns/getMonth');
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
@@ -49,7 +50,10 @@ habits.get('/', (req, res) => {
                     weeksEntries.push(entries);
                 }
                 // console.log(weeksEntries[1][6].date);
-                // console.log(isSameWeek(todaysDate, weeksEntries[1][6].date));
+                // console.log(isSameWeek(todaysDate, weeksEntries[0][6].date));
+                // if(isSameWeek(todaysDate, weeksEntries[0][6].date == false){
+
+                // }
                 // console.log(weeksEntries);
                 res.render('habits/index.ejs', {
                     habits: allHabits,
@@ -136,6 +140,8 @@ habits.get('/:id', (req, res) => {
         // });
         let query = Entry.find({ habit_id: foundHabit._id }).sort({ date: 1 });
 
+        let thisMonth = getMonth(Date.now());
+
         const prom = query.exec();
         prom.then((allEntries) => {
             console.log(allEntries);
@@ -146,7 +152,8 @@ habits.get('/:id', (req, res) => {
                 id: req.params.id,
                 entries: allEntries,
                 // months: ['December', 'November', 'October', 'September']
-                months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                currentMonth: thisMonth,
+                months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].splice((12 - thisMonth + 5), 4)
             });
         });
     });
