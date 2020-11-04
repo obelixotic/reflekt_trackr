@@ -10,6 +10,7 @@ const habits = express.Router();
 const getDay = require('date-fns/getDay');
 const getDate = require('date-fns/getDate');
 const subDays = require('date-fns/subDays');
+const isSameWeek = require('date-fns/isSameWeek');
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
@@ -33,6 +34,7 @@ habits.get('/', (req, res) => {
                 // let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
                 //     // console.log('habitEntries: ', habitEntries);
                 // });
+                todaysDate = Date.now();
 
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
@@ -44,9 +46,11 @@ habits.get('/', (req, res) => {
                 for (entries of allEntries) {
                     entries = entries.slice(entries.length - 7);
                     // entries = entries.splice(7, 7);
-                    weeksEntries.push(entries)
+                    weeksEntries.push(entries);
                 }
-                console.log(weeksEntries);
+                // console.log(weeksEntries[1][6].date);
+                // console.log(isSameWeek(todaysDate, weeksEntries[1][6].date));
+                // console.log(weeksEntries);
                 res.render('habits/index.ejs', {
                     habits: allHabits,
                     currentUser: req.session.currentUser,
@@ -140,7 +144,9 @@ habits.get('/:id', (req, res) => {
                 currentUser: req.session.currentUser,
                 habit: foundHabit,
                 id: req.params.id,
-                entries: allEntries
+                entries: allEntries,
+                // months: ['December', 'November', 'October', 'September']
+                months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
             });
         });
     });

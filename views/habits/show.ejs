@@ -37,11 +37,13 @@
         <ul class="cal-view">
             <% for (let i=0; i<entries.length/7; i++) { %>
                 <li class="cal-rows">
-                    <a class="cal-week-label">WEEK <%= i+1 %></a>
+                    <a class="cal-week-label">
+                        WEEK <%= i+1 %>
+                    </a>
                     <br />
                     <% for (let j=0; j<7; j++) { %>
                         <%if (entries[j + (7*i)].done === true) { %>
-                            <div class="cal-days" style="background-color:red"></div>
+                            <div class="cal-days" style="background-color:rgba(10,10,10,0.4)"></div>
                             <% } else { %>
                                 <div class="cal-days"></div>
                                 <% } %>
