@@ -124,11 +124,21 @@ habits.patch('/:id/entry', (req, res) => {
 habits.get('/:id', (req, res) => {
     // res.send(`show ${req.params.id}`);
     Habit.findById(req.params.id, (err, foundHabit) => {
-        res.render('habits/show.ejs', {
-            tabTitle: foundHabit.name,
-            currentUser: req.session.currentUser,
-            habit: foundHabit,
-            id: req.params.id
+        // let promArray = [];
+        let query = Entry.find({ habit_id: foundHabit._id }, (err, habitEntries) => {
+            // console.log('habitEntries: ', habitEntries);
+        });
+        // promArray.push(prom);
+        const prom = query.exec();
+        prom.then((allEntries) => {
+            console.log(allEntries);
+            res.render('habits/show.ejs', {
+                tabTitle: foundHabit.name,
+                currentUser: req.session.currentUser,
+                habit: foundHabit,
+                id: req.params.id,
+                entries: allEntries
+            });
         });
     });
 });
