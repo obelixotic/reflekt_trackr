@@ -12,6 +12,8 @@ const getDate = require('date-fns/getDate');
 const subDays = require('date-fns/subDays');
 const isSameWeek = require('date-fns/isSameWeek');
 const getMonth = require('date-fns/getMonth');
+const isSameMonth = require('date-fns/isSameMonth');
+const getWeek = require('date-fns/getWeek');
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
@@ -42,18 +44,20 @@ habits.get('/', (req, res) => {
                 const prom = query.exec();
                 promArray.push(prom);
             }
+
             Promise.all(promArray).then((allEntries) => {
+                //lets check if the week has changed
+                let diffInWeeks = getWeek(todaysDate) - getWeek(allEntries[0][allEntries[0].length - 1].date);
+                console.log(diffInWeeks);
+                // if (diffInWeeks > 0) {
+
+                // }
                 let weeksEntries = []
                 for (entries of allEntries) {
                     entries = entries.slice(entries.length - 7);
                     // entries = entries.splice(7, 7);
                     weeksEntries.push(entries);
                 }
-                // console.log(weeksEntries[1][6].date);
-                // console.log(isSameWeek(todaysDate, weeksEntries[0][6].date));
-                // if(isSameWeek(todaysDate, weeksEntries[0][6].date == false){
-
-                // }
                 // console.log(weeksEntries);
                 res.render('habits/index.ejs', {
                     habits: allHabits,
