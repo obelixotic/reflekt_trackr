@@ -31,8 +31,9 @@
                         <div class="day-letter">S</div>
                     </li>
                     <% } %>
-
-                        <li class="cal-rows">
+                        <li class="cal-rows <% if(i==0) { %>
+                            cal-row1
+                        <% } %> ">
                             <a class="cal-week-label">WEEK <%= i+1 %></a>
                             <br />
                             <% for (let j=0; j<7; j++) { %>

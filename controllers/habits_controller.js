@@ -63,6 +63,7 @@ habits.get('/new', isAuthenticated, (req, res) => {
 habits.post('/', isAuthenticated, (req, res) => {
     req.body.done = false;
     req.body.user = req.session.currentUser.username;
+    req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
     Habit.create(req.body, (err, createdHabit) => {
         if (err) {
             console.log(err);
