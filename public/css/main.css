@@ -274,3 +274,8 @@ li div {
     flex-direction: row;
     justify-content: flex-start;
 }
+
+#edit {
+    position: relative;
+    left: 4px;
+}
