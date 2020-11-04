@@ -12,9 +12,14 @@
     <div class="container">
         <div class="heading-bar">
             <h2 class="page-heading">
-                <%= habit.name %>
+                <%= habit.name.toUpperCase() %>
             </h2>
-            <%- include ('../partials/back.ejs') %>
+            <div class="icons">
+                <form class="add-habit" action="/habits/<%= id %>/edit" method="GET">
+                    <input type="image" alt="submit" src="/assets/edit-white.svg" />
+                </form>
+                <%- include ('../partials/back.ejs') %>
+            </div>
         </div>
         <ul>
             <li class="days">

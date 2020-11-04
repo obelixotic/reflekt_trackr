@@ -252,3 +252,25 @@ li div {
 .cal-row1 {
     margin-top: 10px;
 }
+
+.icons {
+    width: 90px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#delete {
+    background-color: red;
+}
+
+.delete {
+    margin-top: -6px;
+}
+
+.edit-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}

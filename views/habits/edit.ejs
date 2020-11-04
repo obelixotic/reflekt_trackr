@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head.ejs') %>
+</head>
+
+<body>
+    <nav>
+        <%- include ('../partials/nav.ejs') %>
+    </nav>
+    <div class="container">
+        <div class="heading-bar">
+            <h2 class="page-heading">EDIT HABIT </h2>
+            <%- include ('../partials/back.ejs') %>
+        </div>
+        <form class="auth-form" action="/habits/<%= id %>/?_method=PUT" method="POST">
+            <p>
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="<%= habit.name %> " />
+            </p>
+            <p>
+                <label for="category">Category</label>
+                <input type="category" name="category" id="category" value="<%= habit.category %> " />
+            </p>
+            <div class="edit-buttons">
+                <input type="submit" value="SAVE"> </form>
+        <form class="auth-form delete" action="/habits/<%= id %>/?_method=DELETE" method="POST">
+            <input id="delete" type="submit" value="DELETE" />
+        </form>
+        </div>
+    </div>
+</body>
+
+</html>

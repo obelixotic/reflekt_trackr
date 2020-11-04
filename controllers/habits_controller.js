@@ -7,6 +7,7 @@ const Habit = require('../models/habits_model.js');
 const User = require('../models/users_model.js');
 const Entry = require('../models/entries_model.js');
 const habits = express.Router();
+const getDay = require('date-fns/getDay');
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
@@ -105,19 +106,32 @@ habits.get('/:id', (req, res) => {
         res.render('habits/show.ejs', {
             tabTitle: foundHabit.name,
             currentUser: req.session.currentUser,
-            habit: foundHabit
+            habit: foundHabit,
+            id: req.params.id
         });
     });
 });
 
 // edit
 habits.get('/:id/edit', (req, res) => {
-    res.send(`edit ${req.params.id}`);
+    // res.send(`edit ${req.params.id}`);
+    Habit.findById(req.params.id, (err, foundHabit) => {
+        console.log(foundHabit);
+        res.render('habits/edit.ejs', {
+            tabTitle: 'Edit habit',
+            currentUser: req.session.currentUser,
+            habit: foundHabit,
+            id: req.params.id
+        });
+    });
 });
 
 // update
 habits.put('/:id', (req, res) => {
     res.send(`update ${req.params.id}`);
+    // Entry.findByIdAndUpdate(req.params.id, { $set: { done: req.body.done } }, (err, result) => {
+    //     res.redirect('/habits/');
+    // });
 });
 
 // delete
