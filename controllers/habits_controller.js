@@ -30,15 +30,20 @@ habits.get('/', (req, res) => {
             let promArray = [];
             for (habit of allHabits) {
                 // console.log('habit._id: ', habit._id);
-                let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
-                    // console.log('habitEntries: ', habitEntries);
-                });
+                // let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
+                //     // console.log('habitEntries: ', habitEntries);
+                // });
+
+                //sort date wise first
+                let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
+                const prom = query.exec();
                 promArray.push(prom);
             }
             Promise.all(promArray).then((allEntries) => {
                 let weeksEntries = []
                 for (entries of allEntries) {
                     entries = entries.slice(entries.length - 7);
+                    // entries = entries.splice(7, 7);
                     weeksEntries.push(entries)
                 }
                 console.log(weeksEntries);
@@ -81,9 +86,7 @@ habits.post('/', isAuthenticated, (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(createdHabit);
-            // User.updateOne({ username: req.session.currentUser.username }, { $push: { habits: `ObjectId("${createdHabit['_id']}")` } }, (err, linkCreated) => {
-
+            // console.log(createdHabit);
             // adding dates to each entry
             let creationDate = Date.now();
             let creationDayOfWeek = getDay(creationDate);
@@ -124,11 +127,11 @@ habits.patch('/:id/entry', (req, res) => {
 habits.get('/:id', (req, res) => {
     // res.send(`show ${req.params.id}`);
     Habit.findById(req.params.id, (err, foundHabit) => {
-        // let promArray = [];
-        let query = Entry.find({ habit_id: foundHabit._id }, (err, habitEntries) => {
-            // console.log('habitEntries: ', habitEntries);
-        });
-        // promArray.push(prom);
+        // let query = Entry.find({ habit_id: foundHabit._id }, (err, habitEntries) => {
+        //     // console.log('habitEntries: ', habitEntries);
+        // });
+        let query = Entry.find({ habit_id: foundHabit._id }).sort({ date: 1 });
+
         const prom = query.exec();
         prom.then((allEntries) => {
             console.log(allEntries);
