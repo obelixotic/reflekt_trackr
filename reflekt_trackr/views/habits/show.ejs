@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head.ejs') %>
+</head>
+
+<body>
+    <nav>
+        <%- include ('../partials/nav.ejs') %>
+    </nav>
+    <div class="container">
+        <div class="heading-bar">
+            <h2 class="page-heading">
+                <%= habit.name.toUpperCase() %>
+            </h2>
+            <div class="icons">
+                <form class="add-habit" action="/habits/<%= id %>/edit" method="GET">
+                    <input id="edit" type="image" alt="submit" src="/assets/edit-white.svg" />
+                </form>
+                <%- include ('../partials/back.ejs') %>
+            </div>
+        </div>
+        <ul>
+            <li class="days">
+                <a class="day-heading">
+                </a>
+                <br/>
+                <div class="day-letter">S</div>
+                <div class="day-letter">M</div>
+                <div class="day-letter">T</div>
+                <div class="day-letter">W</div>
+                <div class="day-letter">T</div>
+                <div class="day-letter">F</div>
+                <div class="day-letter">S</div>
+            </li>
+        </ul>
+        <ul class="cal-view">
+            <% for (let i=0; i<entries.length/7; i++) { %>
+                <li class="cal-rows">
+                    <a class="cal-week-label">
+                        WEEK <%= i+1 %>
+                    </a>
+                    <br />
+                    <% for (let j=0; j<7; j++) { %>
+                        <%if (entries[j + (7*i)].done === true) { %>
+                            <div class="cal-days" style="background-color:rgba(200,10,10,0.5)"></div>
+                            <% } else { %>
+                                <div class="cal-days"></div>
+                                <% } %>
+                                    <% } %>
+                </li>
+                <% } %>
+
+        </ul>
+    </div>
+</body>
+
+</html>

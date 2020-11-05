@@ -1,0 +1,38 @@
+<div class="nav-bar">
+    <% if (currentUser) { %>
+        <h1 class="welcome">Hi
+            <%= currentUser.username.toLowerCase().charAt(0).toUpperCase() + currentUser.username.slice(1) %>!
+        </h1>
+        <!-- <h1 class="brand-logo">Reflekt</h1> -->
+        <div class="auth-links">
+            <form action="/sessions?_method=DELETE" method="POST">
+                <input type="submit" value="LOGOUT" class="btn-small red" />
+            </form>
+        </div>
+        <% } else if (tabTitle == 'Login'){ %>
+            <h1 class="brand-logo">Reflekt</h1>
+            <div class="auth-links">
+                <form action="/users/new" method="GET">
+                    <input id="sign-up" type="submit" value="SIGNUP" class="btn-small" />
+                </form>
+            </div>
+            <% } else if (tabTitle == 'Signup') { %>
+                <h1 class="brand-logo">Reflekt</h1>
+                <div class="auth-links">
+                    <form action="/sessions/new" method="GET">
+                        <input id="log-in" type="submit" value="LOGIN" class="btn-small" />
+                    </form>
+                </div>
+                <% } else { %>
+                    <h1 class="brand-logo">Reflekt</h1>
+                    <div class="auth-links">
+                        <form action="/sessions/new" method="GET">
+                            <input id="log-in" type="submit" value="LOGIN" class="btn-small" />
+                        </form>
+                        <form action="/users/new" method="GET">
+                            <input id="sign-up" type="submit" value="SIGNUP" class="btn-small" />
+                        </form>
+
+                    </div>
+                    <% } %>
+</div>

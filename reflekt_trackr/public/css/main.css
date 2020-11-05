@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+body {
+    width: 100%;
+    max-width: 600px;
+    height: 720px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fbfff5;
+    color: rgba(10, 10, 10, 0.9);
+    align-self: center;
+}
+
+ul {
+    margin-top: 0px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    margin-left: -20px;
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 21px;
+    padding-right: 20px;
+    border-bottom: 1px solid rgba(194, 194, 194, 0.3);
+    padding-left: 20px;
+}
+
+li a {
+    width: 120px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.entries {
+    margin: 0 8px;
+}
+
+.entries input[type=image] {
+    width: 13px;
+}
+
+a {
+    text-decoration: none;
+    /* color: rgb(72, 9, 145); */
+    color: rgba(10, 10, 10, 0.9);
+    cursor: pointer;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+a:visited {
+    /* color: rgb(72, 9, 145); */
+    color: rgba(10, 10, 10, 0.9);
+}
+
+.add-habit {
+    width: 20px;
+    align-self: center;
+    margin-right: 20px;
+}
+
+.add-habit input[type=image] {
+    width: 15px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: inherit;
+    /* background-color: salmon; */
+    background-color: #12b482;
+    height: 60px;
+}
+
+.welcome,
+.log-out {
+    margin-right: 20px;
+}
+
+.welcome {
+    margin-left: 20px;
+    color: white;
+    font-family: 'Montserrat', 'semi-bold';
+    font-size: 18px;
+}
+
+.brand-logo {
+    width: 50%;
+    font-size: 30px;
+    margin-left: 20px;
+    color: white;
+}
+
+.nav-bar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heading-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: rgb(14, 167, 167); */
+    background-color: #20e4a6;
+    height: 60px;
+}
+
+.page-heading {
+    width: 200px;
+    margin-left: 20px;
+    color: white;
+    font-size: 15px;
+}
+
+.auth-links {
+    display: flex;
+    font-size: 13px;
+}
+
+
+/* .log-in {
+    margin-right: 10px;
+    color: white;
+} */
+
+
+/* #log-in {
+    width: 60px;
+}
+
+.sign-up {
+    margin-right: 20px;
+    margin-left: -14px;
+    color: white;
+}
+
+#sign-up,
+#log-in {
+    color: white;
+} */
+
+#sign-up {
+    margin-left: -14px;
+    background-color: #20e4a6;
+}
+
+.auth-links input {
+    height: 36px;
+    width: 70px;
+    /* background-color: brown; */
+    background-color: #12b482;
+    color: white;
+    /* border-radius: 4px; */
+    border: none;
+    /* border: 1px solid white; */
+    margin-right: 14px;
+}
+
+.catch-phrase {
+    line-height: 40px;
+    font-size: 20px;
+    color: #8080808c;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.container {
+    height: 100%;
+    background-color: #fbfff5;
+}
+
+.days {
+    font-size: 12px;
+    margin: 0px;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    /* background: rgba(10, 10, 10, 0.7); */
+    background-color: red;
+}
+
+li div {
+    position: relative;
+    left: -6px;
+}
+
+.auth-form {
+    margin-left: 20px;
+    margin-top: 30px;
+    line-height: 40px;
+}
+
+.auth-form input[type=submit] {
+    border: none;
+    width: 70px;
+    height: 30px;
+    background-color: #12b482;
+    color: white;
+}
+
+.auth-form label {
+    margin-bottom: -15px;
+    display: inline-block;
+    width: 100px;
+}
+
+.day-letter {
+    width: 20px;
+    text-align: center;
+    /* background-color: rgba(10, 10, 10, 0.8); */
+    color: white;
+    padding-top: 2px;
+    border-radius: 23%;
+    margin-left: 9px;
+}
+
+.day-heading {
+    color: white;
+    margin: 0;
+}
+
+.cal-view {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
+.cal-days {
+    border: 1px solid rgba(100, 10, 10, 0.1);
+    width: 20px;
+    height: 20px;
+}
+
+.cal-week-label {
+    color: rgba(10, 10, 10, 0.9);
+    margin: 0;
+}
+
+.cal-rows {
+    padding-top: 6px;
+}
+
+.cal-row1 {
+    margin-top: 10px;
+}
+
+.icons {
+    width: 90px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#delete {
+    background-color: red;
+}
+
+.delete {
+    margin-top: -6px;
+}
+
+.edit-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#edit {
+    position: relative;
+    left: 4px;
+}
+
+
+/* .day-heading h3 {
+    margin: 0;
+    font-size: 16px;
+} */
