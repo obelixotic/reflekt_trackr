@@ -3,4 +3,4 @@
 
 URL: https://reflekt-trackr.herokuapp.com/
 
-![](/public/assets/cross.svg)
+![](/wireframes/reflekt-w0.png)
