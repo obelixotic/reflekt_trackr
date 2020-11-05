@@ -41,10 +41,10 @@ habits.get('/', (req, res) => {
                     tabTitle: 'Home'
                 });
             }
-            // let todaysDate = Date.now();
+            let todaysDate = Date.now();
             // let todaysDate = 1605246664602;
             // let todaysDate = 1605946664602;
-            let todaysDate = 1606346664602;
+            // let todaysDate = 1606346664602;
             // console.log('day pre: ', getDay(todaysDate)); //3
             // todaysDate = addDays(todaysDate, (6 - getDay(todaysDate)));
             // console.log('day post: ', getDay(todaysDate)); //2
