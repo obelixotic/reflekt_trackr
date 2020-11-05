@@ -13,7 +13,7 @@ To learn by doing - develop a full stack CRUD web application using the followin
 * Mongoose
 * Heroku (deployment)
 
-The project adheres to the MVC file structure: Models, Views, Controllers
+The project adheres to the MVC file structure (Models, Views, Controllers) and has been designed for *mobile devices*
 
 ### Features:
 1. User authentication
