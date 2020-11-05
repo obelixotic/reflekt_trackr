@@ -32,6 +32,15 @@ habits.get('/', (req, res) => {
     if (req.session.currentUser) {
         // if authenticated
         Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
+            console.log(allHabits);
+            if (allHabits.length == 0) {
+                res.render('habits/index.ejs', {
+                    habits: '',
+                    currentUser: req.session.currentUser,
+                    entries: '',
+                    tabTitle: 'Home'
+                });
+            }
             let promArray = [];
             for (habit of allHabits) {
                 // console.log('habit._id: ', habit._id);
@@ -39,7 +48,10 @@ habits.get('/', (req, res) => {
                 //     // console.log('habitEntries: ', habitEntries);
                 // });
                 // todaysDate = Date.now();
-                todaysDate = 1606263181218;
+                // todaysDate = 1604975157204;
+                // todaysDate = 1605407209272;
+                todaysDate = 1606012009272;
+                // todaysDate = 1606263181218;
 
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
@@ -49,9 +61,11 @@ habits.get('/', (req, res) => {
 
             Promise.all(promArray).then((allEntries) => {
                 //lets check if the week has changed
+                // let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
                 let diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
                 console.log(lastDateOfEntry, todaysDate, diffInWeeks);
+
                 if (diffInWeeks > 0) {
                     console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1);
@@ -65,11 +79,11 @@ habits.get('/', (req, res) => {
                         }
                     }
                     Promise.all(promArray2).then((createdEntries) => {
-                        console.log(createdEntries);
+                        console.log(allEntries);
                         let weeksEntries = []
-                        for (entries of createdEntries) {
+                        for (entries of allEntries) {
                             entries = entries.slice(entries.length - 7);
-                            // entries = entries.splice(7, 7);
+                            entries = entries.splice(7, 7);
                             weeksEntries.push(entries);
                         }
                         // console.log(weeksEntries);
@@ -221,8 +235,10 @@ habits.put('/:id', (req, res) => {
 // delete
 habits.delete('/:id', (req, res) => {
     // res.send(`delete ${req.params.id}`);
-    Habit.findByIdAndDelete(req.params.id, (err, deleted) => {
-        res.redirect('/habits');
+    Habit.findByIdAndDelete(req.params.id, (err, toDeleteHabit) => {
+        Entry.findByIdAndDelete({ habit_id: toDeleteHabit._id }, (err, toDeleteEntries) => {
+            res.redirect('/habits');
+        });
     });
 });
 
