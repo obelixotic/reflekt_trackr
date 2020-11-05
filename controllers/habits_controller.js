@@ -39,7 +39,7 @@ habits.get('/', (req, res) => {
                 //     // console.log('habitEntries: ', habitEntries);
                 // });
                 // todaysDate = Date.now();
-                todaysDate = 1605399181218;
+                todaysDate = 1606263181218;
 
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
