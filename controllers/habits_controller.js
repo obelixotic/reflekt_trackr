@@ -41,17 +41,20 @@ habits.get('/', (req, res) => {
                     tabTitle: 'Home'
                 });
             }
+            // let todaysDate = Date.now();
+            // let todaysDate = 1605246664602;
+            // let todaysDate = 1605946664602;
+            let todaysDate = 1606346664602;
+            // console.log('day pre: ', getDay(todaysDate)); //3
+            // todaysDate = addDays(todaysDate, (6 - getDay(todaysDate)));
+            // console.log('day post: ', getDay(todaysDate)); //2
+
             let promArray = [];
             for (habit of allHabits) {
                 // console.log('habit._id: ', habit._id);
                 // let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
                 //     // console.log('habitEntries: ', habitEntries);
                 // });
-                // todaysDate = Date.now();
-                // todaysDate = 1604975157204;
-                // todaysDate = 1605407209272;
-                todaysDate = 1606012009272;
-                // todaysDate = 1606263181218;
 
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
@@ -61,14 +64,17 @@ habits.get('/', (req, res) => {
 
             Promise.all(promArray).then((allEntries) => {
                 //lets check if the week has changed
-                // let diffInWeeks = 0;
+                let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
-                let diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
-                console.log(lastDateOfEntry, todaysDate, diffInWeeks);
+                console.log(lastDateOfEntry);
+                diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
+                // console.log(getDay(lastDateOfEntry), getDay(todaysDate));
+                console.log(getWeek(lastDateOfEntry), getWeek(todaysDate), diffInWeeks);
 
                 if (diffInWeeks > 0) {
+                    // if logging-in a different week
                     console.log("entered conditional loop: \n");
-                    firstDayForEntry = addDays(lastDateOfEntry, 1);
+                    firstDayForEntry = addDays(lastDateOfEntry, 1); //1
                     let promArray2 = [];
                     for (habit of allHabits) {
                         for (let i = 0; i < 7 * diffInWeeks; i++) {
@@ -79,22 +85,23 @@ habits.get('/', (req, res) => {
                         }
                     }
                     Promise.all(promArray2).then((createdEntries) => {
-                        console.log(allEntries);
-                        let weeksEntries = []
-                        for (entries of allEntries) {
-                            entries = entries.slice(entries.length - 7);
-                            entries = entries.splice(7, 7);
-                            weeksEntries.push(entries);
-                        }
+                        // console.log(createdEntries);
+                        // let weeksEntries = []
+                        // for (entries of createdEntries) {
+                        // entries.slice(entries.length - 7);
+                        // entries = entries.splice(entries.length - 7, 7);
+                        // weeksEntries.push(entries);
+                        // }
                         // console.log(weeksEntries);
                         res.render('habits/index.ejs', {
                             habits: allHabits,
                             currentUser: req.session.currentUser,
-                            entries: weeksEntries,
+                            entries: createdEntries,
                             tabTitle: 'Home'
                         });
                     });
                 } else {
+                    // if logging-in the same week
                     let weeksEntries = []
                     for (entries of allEntries) {
                         entries = entries.slice(entries.length - 7);
@@ -187,7 +194,7 @@ habits.get('/:id', (req, res) => {
         // });
         let query = Entry.find({ habit_id: foundHabit._id }).sort({ date: 1 });
 
-        let thisMonth = getMonth(Date.now());
+        // let thisMonth = getMonth(Date.now());
 
         const prom = query.exec();
         prom.then((allEntries) => {
@@ -199,8 +206,8 @@ habits.get('/:id', (req, res) => {
                 id: req.params.id,
                 entries: allEntries,
                 // months: ['December', 'November', 'October', 'September']
-                currentMonth: thisMonth,
-                months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].splice((12 - thisMonth + 5), 4)
+                // currentMonth: thisMonth,
+                // months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].splice((12 - thisMonth + 5), 4)
             });
         });
     });
@@ -236,7 +243,7 @@ habits.put('/:id', (req, res) => {
 habits.delete('/:id', (req, res) => {
     // res.send(`delete ${req.params.id}`);
     Habit.findByIdAndDelete(req.params.id, (err, toDeleteHabit) => {
-        Entry.findByIdAndDelete({ habit_id: toDeleteHabit._id }, (err, toDeleteEntries) => {
+        Entry.deleteMany({ habit_id: toDeleteHabit._id }, (err, toDeleteEntries) => {
             res.redirect('/habits');
         });
     });

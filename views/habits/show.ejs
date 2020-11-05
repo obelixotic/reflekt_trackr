@@ -11,7 +11,9 @@
     </nav>
     <div class="container">
         <div class="heading-bar">
-            <h2 class="page-heading">CALENDAR VIEW</h2>
+            <h2 class="page-heading">
+                <%= habit.name.toUpperCase() %>
+            </h2>
             <div class="icons">
                 <form class="add-habit" action="/habits/<%= id %>/edit" method="GET">
                     <input id="edit" type="image" alt="submit" src="/assets/edit-white.svg" />
@@ -22,7 +24,6 @@
         <ul>
             <li class="days">
                 <a class="day-heading">
-                    <%= habit.name.toUpperCase() %>
                 </a>
                 <br/>
                 <div class="day-letter">S</div>

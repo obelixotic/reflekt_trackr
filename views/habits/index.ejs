@@ -14,7 +14,11 @@
         <% if (currentUser) { %>
             <div class="heading-bar">
                 <h2 class="page-heading">
-                    MY WEEKLY TRACKER
+                    <% if (entries) { %>
+                        MY WEEKLY TRACKER
+                        <% } else { %>
+                            ADD HABITS
+                            <% } %>
                 </h2>
                 <form class="add-habit" action="/habits/new" method="GET">
                     <input type="image" alt="submit" src="/assets/plus-white.svg" />
