@@ -10,6 +10,7 @@ const habits = express.Router();
 const getDay = require('date-fns/getDay');
 const getDate = require('date-fns/getDate');
 const subDays = require('date-fns/subDays');
+const addDays = require('date-fns/addDays');
 const isSameWeek = require('date-fns/isSameWeek');
 const getMonth = require('date-fns/getMonth');
 const isSameMonth = require('date-fns/isSameMonth');
@@ -38,6 +39,7 @@ habits.get('/', (req, res) => {
                 //     // console.log('habitEntries: ', habitEntries);
                 // });
                 todaysDate = Date.now();
+                // todaysDate = 
 
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
@@ -47,24 +49,48 @@ habits.get('/', (req, res) => {
 
             Promise.all(promArray).then((allEntries) => {
                 //lets check if the week has changed
-                let diffInWeeks = getWeek(todaysDate) - getWeek(allEntries[0][allEntries[0].length - 1].date);
+                let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
+                let diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
                 console.log(diffInWeeks);
-                // if (diffInWeeks > 0) {
-
-                // }
-                let weeksEntries = []
-                for (entries of allEntries) {
-                    entries = entries.slice(entries.length - 7);
-                    // entries = entries.splice(7, 7);
-                    weeksEntries.push(entries);
+                if (diffInWeeks > 0) {
+                    firstDayForEntry = addDays(lastDateOfEntry, 1);
+                    let promArray2 = [];
+                    for (let i = 0; i < 7 * diffInWeeks; i++) {
+                        let entryDate = addDays(firstDayForEntry, i);
+                        console.log(entryDate);
+                        let prom2 = Entry.create({ habit_id: createdHabit['_id'], date: entryDate });
+                        promArray2.push(prom2);
+                    }
+                    Promise.all(promArray2).then((allEntries) => {
+                        let weeksEntries = []
+                        for (entries of allEntries) {
+                            entries = entries.slice(entries.length - 7);
+                            // entries = entries.splice(7, 7);
+                            weeksEntries.push(entries);
+                        }
+                        // console.log(weeksEntries);
+                        res.render('habits/index.ejs', {
+                            habits: allHabits,
+                            currentUser: req.session.currentUser,
+                            entries: weeksEntries,
+                            tabTitle: 'Home'
+                        });
+                    });
+                } else {
+                    let weeksEntries = []
+                    for (entries of allEntries) {
+                        entries = entries.slice(entries.length - 7);
+                        // entries = entries.splice(7, 7);
+                        weeksEntries.push(entries);
+                    }
+                    // console.log(weeksEntries);
+                    res.render('habits/index.ejs', {
+                        habits: allHabits,
+                        currentUser: req.session.currentUser,
+                        entries: weeksEntries,
+                        tabTitle: 'Home'
+                    });
                 }
-                // console.log(weeksEntries);
-                res.render('habits/index.ejs', {
-                    habits: allHabits,
-                    currentUser: req.session.currentUser,
-                    entries: weeksEntries,
-                    tabTitle: 'Home'
-                });
             });
         });
     } else {
@@ -102,7 +128,6 @@ habits.post('/', isAuthenticated, (req, res) => {
             // adding dates to each entry
             let creationDate = Date.now();
             let creationDayOfWeek = getDay(creationDate);
-            let creationDateOfMonth = getDate(creationDate);
 
             // create default false entries for a week
             let promArray = [];
@@ -148,7 +173,7 @@ habits.get('/:id', (req, res) => {
 
         const prom = query.exec();
         prom.then((allEntries) => {
-            console.log(allEntries);
+            // console.log(allEntries);
             res.render('habits/show.ejs', {
                 tabTitle: foundHabit.name,
                 currentUser: req.session.currentUser,
