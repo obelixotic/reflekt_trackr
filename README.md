@@ -3,7 +3,8 @@
 
 URL: https://reflekt-trackr.herokuapp.com/
 
-Purpose: To learn by doing - develop a full stack CRUD web application using the following technologies:
+### Purpose: 
+To learn by doing - develop a full stack CRUD web application using the following technologies:
 * HTML/CSS
 * JavaScript
 * Node
@@ -14,7 +15,7 @@ Purpose: To learn by doing - develop a full stack CRUD web application using the
 
 The project adheres to the MVC file structure: Models, Views, Controllers
 
-Feature:
+### Features:
 1. User authentication
 2. Session management
 3. CRUD - Create, Read, Update, Delete
@@ -33,3 +34,11 @@ Feature:
 
 ### Snapshot view
 ![](/wireframes/reflekt-w4.png)
+
+### More features I'd like to add
+1. Category wise colors
+2. Combined snapshot of all habits
+3. Edit functionality for previous weeks
+
+#### Bugs/open issues
+Promise doesnt resolve when logging in the week hence to populate the weekly tracker view and breaks, however, on refresh it loads fine
