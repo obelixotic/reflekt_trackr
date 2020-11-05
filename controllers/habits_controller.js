@@ -171,7 +171,7 @@ habits.post('/', isAuthenticated, (req, res) => {
 });
 
 // make a daily entry
-habits.patch('/:id/entry', (req, res) => {
+habits.patch('/:id/entry', isAuthenticated, (req, res) => {
     // req.body.habit_id = req.params.id;
     if (req.body.done === "false") {
         req.body.done = true;
@@ -186,7 +186,7 @@ habits.patch('/:id/entry', (req, res) => {
 });
 
 // show
-habits.get('/:id', (req, res) => {
+habits.get('/:id', isAuthenticated, (req, res) => {
     // res.send(`show ${req.params.id}`);
     Habit.findById(req.params.id, (err, foundHabit) => {
         // let query = Entry.find({ habit_id: foundHabit._id }, (err, habitEntries) => {
@@ -214,7 +214,7 @@ habits.get('/:id', (req, res) => {
 });
 
 // edit
-habits.get('/:id/edit', (req, res) => {
+habits.get('/:id/edit', isAuthenticated, (req, res) => {
     // res.send(`edit ${req.params.id}`);
     Habit.findById(req.params.id, (err, foundHabit) => {
         console.log(foundHabit);
@@ -228,7 +228,7 @@ habits.get('/:id/edit', (req, res) => {
 });
 
 // update
-habits.put('/:id', (req, res) => {
+habits.put('/:id', isAuthenticated, (req, res) => {
     // console.log(req.body);
     // res.send(`update ${req.params.id}`);
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
@@ -240,7 +240,7 @@ habits.put('/:id', (req, res) => {
 });
 
 // delete
-habits.delete('/:id', (req, res) => {
+habits.delete('/:id', isAuthenticated, (req, res) => {
     // res.send(`delete ${req.params.id}`);
     Habit.findByIdAndDelete(req.params.id, (err, toDeleteHabit) => {
         Entry.deleteMany({ habit_id: toDeleteHabit._id }, (err, toDeleteEntries) => {
