@@ -38,8 +38,8 @@ habits.get('/', (req, res) => {
                 // let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
                 //     // console.log('habitEntries: ', habitEntries);
                 // });
-                todaysDate = Date.now();
-                // todaysDate = 
+                // todaysDate = Date.now();
+                todaysDate = 1605399181218;
 
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
@@ -51,19 +51,23 @@ habits.get('/', (req, res) => {
                 //lets check if the week has changed
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
                 let diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
-                console.log(diffInWeeks);
+                console.log(lastDateOfEntry, todaysDate, diffInWeeks);
                 if (diffInWeeks > 0) {
+                    console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1);
                     let promArray2 = [];
-                    for (let i = 0; i < 7 * diffInWeeks; i++) {
-                        let entryDate = addDays(firstDayForEntry, i);
-                        console.log(entryDate);
-                        let prom2 = Entry.create({ habit_id: createdHabit['_id'], date: entryDate });
-                        promArray2.push(prom2);
+                    for (habit of allHabits) {
+                        for (let i = 0; i < 7 * diffInWeeks; i++) {
+                            let entryDate = addDays(firstDayForEntry, i);
+                            console.log(entryDate);
+                            let prom2 = Entry.create({ habit_id: habit['_id'], date: entryDate });
+                            promArray2.push(prom2);
+                        }
                     }
-                    Promise.all(promArray2).then((allEntries) => {
+                    Promise.all(promArray2).then((createdEntries) => {
+                        console.log(createdEntries);
                         let weeksEntries = []
-                        for (entries of allEntries) {
+                        for (entries of createdEntries) {
                             entries = entries.slice(entries.length - 7);
                             // entries = entries.splice(7, 7);
                             weeksEntries.push(entries);
