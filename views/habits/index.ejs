@@ -50,8 +50,20 @@
                                     <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
                                         <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
                                         <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
-                                                /assets/check.svg 
+                                            <% if (habits[i].color == 'green') { %>
+                                                /assets/check-green.png
+                                                <% } else if (habits[i].color == 'violet') { %>
+                                                    /assets/check-violet.png 
+                                                <% } else if (habits[i].color == 'cyan') { %>
+                                                    /assets/check-cyan.png
+                                                    <% } else if (habits[i].color == 'yellow') { %>
+                                                        /assets/check-yellow.png
+                                                    <% } else if (habits[i].color == 'orange') { %>
+                                                        /assets/check-orange.png 
                                                 <% } else { %> 
+                                                    /assets/check.svg
+                                                    <% } %>
+                                                <% } else { %>
                                                     /assets/cross.svg" style="width:13px;opacity:0.1
                                     <% } %>" value="<%= entries[i][j].done %>" class="btn-small" />
                                     </form>
