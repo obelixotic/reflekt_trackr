@@ -19,11 +19,10 @@ The project adheres to the MVC file structure (Models, Views, Controllers) and h
 ### Features:
 1. User authentication
 2. Session management
-3. CRUD - Create, Read, Update, Delete
-4. Add (/edit/delete) habits to track
-5. Color picker for each habit
-6. Track habits weekly with a simple interface
-7. See a longer term snapshot for each habit
+3. CRUD (Create, Read, Update, Delete) habits ot track
+4. Assign color for a habit
+5. Track habits weekly 
+6. See a longer term snapshot for each habit
 
 ### User auth page
 ![](/wireframes/reflekt-w1.png) 
