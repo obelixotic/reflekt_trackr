@@ -7,6 +7,7 @@ URL: https://reflekt-trackr.herokuapp.com/
 To learn by doing - develop a full stack CRUD web application using the following technologies:
 * HTML/CSS
 * JavaScript
+* jQuery
 * Node
 * Express
 * MongoDB / MongoDB Atlas (Cloud)
@@ -20,8 +21,9 @@ The project adheres to the MVC file structure (Models, Views, Controllers) and h
 2. Session management
 3. CRUD - Create, Read, Update, Delete
 4. Add (/edit/delete) habits to track
-5. Track them weekly with a simple interface
-6. See a longer term snapshot for each habit
+5. Color picker for each habit
+6. Track habits weekly with a simple interface
+7. See a longer term snapshot for each habit
 
 ### User auth page
 ![](/wireframes/reflekt-w1.png) 
