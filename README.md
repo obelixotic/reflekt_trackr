@@ -31,7 +31,7 @@ The project adheres to the MVC file structure (Models, Views, Controllers) and h
 ![](/wireframes/reflekt-w3.png) 
 
 ### Weekly tracker view
-![](/wireframes/reflekt-w2.png)
+![](/wireframes/reflekt-w2a.png)
 
 ### Snapshot view
 ![](/wireframes/reflekt-w4a.png)
