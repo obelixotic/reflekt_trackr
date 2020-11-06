@@ -39,12 +39,12 @@
             <% for (let i=0; i<entries.length/7; i++) { %>
                 <li class="cal-rows">
                     <a class="cal-week-label">
-                        WEEK <%= i+1 %>
+                        Week <%= i+1 %>
                     </a>
                     <br />
                     <% for (let j=0; j<7; j++) { %>
                         <%if (entries[j + (7*i)].done === true) { %>
-                            <div class="cal-days <%= habit.color %>"></div>
+                            <div class="cal-days grey <%= habit.color %>"></div>
                             <% } else { %>
                                 <div class=" cal-days "></div>
                                 <% } %>
