@@ -33,7 +33,7 @@ The project adheres to the MVC file structure (Models, Views, Controllers) and h
 ![](/wireframes/reflekt-w2.png)
 
 ### Snapshot view
-![](/wireframes/reflekt-w4.png)
+![](/wireframes/reflekt-w4a.png)
 
 ### More features I'd like to add
 1. Category wise view
