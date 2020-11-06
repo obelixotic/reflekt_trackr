@@ -36,7 +36,7 @@ The project adheres to the MVC file structure (Models, Views, Controllers) and h
 ![](/wireframes/reflekt-w4.png)
 
 ### More features I'd like to add
-1. Category wise colors
+1. Category wise view
 2. Combined snapshot of all habits
 3. Edit functionality for previous weeks
 
