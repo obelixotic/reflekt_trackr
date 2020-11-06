@@ -221,8 +221,8 @@ li div {
 
 .auth-form input[type=submit] {
     border: none;
-    width: 70px;
-    height: 30px;
+    width: 90px;
+    height: 40px;
     background-color: var(--color-dark);
     color: white;
 }
@@ -288,7 +288,7 @@ li div {
 }
 
 .delete {
-    margin-top: -6px;
+    margin-top: -1px;
 }
 
 .edit-buttons {
@@ -319,6 +319,11 @@ input[type=password] {
     margin-right: 10px;
 }
 
+.white {
+    border: 1px solid rgba(10, 10, 10, 0.3);
+    box-sizing: border-box;
+}
+
 .violet {
     background-color: #d3adf7;
 }
@@ -337,6 +342,12 @@ input[type=password] {
 
 .orange {
     background-color: #ff9c6e;
+}
+
+.category-border {
+    border: 1px solid rgba(10, 10, 10, 0.7);
+    box-sizing: border-box;
+    box-shadow: 2px 2px grey;
 }
 
 

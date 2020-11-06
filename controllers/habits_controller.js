@@ -32,7 +32,7 @@ habits.get('/', (req, res) => {
     if (req.session.currentUser) {
         // if authenticated
         Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
-            console.log(allHabits);
+            // console.log(allHabits);
             if (allHabits.length == 0) {
                 res.render('habits/index.ejs', {
                     habits: '',
@@ -145,6 +145,8 @@ habits.post('/', isAuthenticated, (req, res) => {
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
     req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
     req.body.date = Date.now();
+    // req.body.color = 
+    console.log(req.body);
     Habit.create(req.body, (err, createdHabit) => {
         if (err) {
             console.log(err);
