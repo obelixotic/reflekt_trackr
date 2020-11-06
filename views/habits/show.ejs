@@ -44,9 +44,9 @@
                     <br />
                     <% for (let j=0; j<7; j++) { %>
                         <%if (entries[j + (7*i)].done === true) { %>
-                            <div class="cal-days" id="grid-yes"></div>
+                            <div class="cal-days <%= habit.color %>"></div>
                             <% } else { %>
-                                <div class="cal-days"></div>
+                                <div class=" cal-days "></div>
                                 <% } %>
                                     <% } %>
                 </li>

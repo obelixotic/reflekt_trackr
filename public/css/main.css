@@ -324,6 +324,10 @@ input[type=password] {
     box-sizing: border-box;
 }
 
+.grey {
+    background-color: var(--color-grid);
+}
+
 .violet {
     background-color: #d3adf7;
 }

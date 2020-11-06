@@ -38,7 +38,7 @@ habits.get('/', (req, res) => {
                     habits: '',
                     currentUser: req.session.currentUser,
                     entries: '',
-                    tabTitle: 'Home'
+                    tabTitle: 'Home',
                 });
             }
             let todaysDate = Date.now();
@@ -97,7 +97,7 @@ habits.get('/', (req, res) => {
                             habits: allHabits,
                             currentUser: req.session.currentUser,
                             entries: createdEntries,
-                            tabTitle: 'Home'
+                            tabTitle: 'Home',
                         });
                     });
                 } else {
@@ -145,7 +145,9 @@ habits.post('/', isAuthenticated, (req, res) => {
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
     req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
     req.body.date = Date.now();
-    // req.body.color = 
+    if (req.body.color == 'white') {
+        req.body.color = 'grey';
+    }
     console.log(req.body);
     Habit.create(req.body, (err, createdHabit) => {
         if (err) {
@@ -235,8 +237,10 @@ habits.put('/:id', isAuthenticated, (req, res) => {
     // res.send(`update ${req.params.id}`);
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
     req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
-
-    Habit.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, category: req.body.category } }, (err, result) => {
+    if (req.body.color == 'white') {
+        req.body.color = 'grey';
+    }
+    Habit.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, category: req.body.category, color: req.body.color } }, (err, result) => {
         res.redirect(`/habits/${req.params.id}`);
     });
 });
