@@ -5,6 +5,7 @@ const habitSchema = new mongoose.Schema({
     user: { type: String },
     category: { type: String },
     color: { type: String },
+    icon: { type: String },
     date: { type: Number }
 });
 
