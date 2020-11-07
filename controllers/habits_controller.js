@@ -33,7 +33,7 @@ habits.get('/', (req, res) => {
         // if authenticated
         let userHabits = Habit.find({ user: req.session.currentUser.username }).sort({ color: 1 });
         userHabits.exec((err, allHabits) => {
-            console.log(allHabits);
+            // console.log(allHabits);
             if (allHabits.length == 0) {
                 res.render('habits/index.ejs', {
                     habits: '',
@@ -67,10 +67,10 @@ habits.get('/', (req, res) => {
                 //lets check if the week has changed
                 let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
-                console.log(lastDateOfEntry);
+                // console.log(lastDateOfEntry);
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
                 // console.log(getDay(lastDateOfEntry), getDay(todaysDate));
-                console.log(getWeek(lastDateOfEntry), getWeek(todaysDate), diffInWeeks);
+                // console.log(getWeek(lastDateOfEntry), getWeek(todaysDate), diffInWeeks);
 
                 if (diffInWeeks > 0) {
                     // if logging-in a different week
