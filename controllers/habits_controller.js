@@ -31,8 +31,9 @@ habits.get('/', (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
     if (req.session.currentUser) {
         // if authenticated
-        Habit.find({ user: req.session.currentUser.username }, (err, allHabits) => {
-            // console.log(allHabits);
+        let userHabits = Habit.find({ user: req.session.currentUser.username }).sort({ color: 1 });
+        userHabits.exec((err, allHabits) => {
+            console.log(allHabits);
             if (allHabits.length == 0) {
                 res.render('habits/index.ejs', {
                     habits: '',

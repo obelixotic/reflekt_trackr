@@ -42,7 +42,7 @@
                         <% } %>
 
                             <li>
-                                <a href="/habits/<%=habits[i]._id%>">
+                                <a href="/habits/<%=habits[i]._id%>" id="<%= habits[i].color %>">
                                     <%= habits[i].name %>
                                 </a>
                                 <br />
@@ -64,7 +64,7 @@
                                                     /assets/check.svg
                                                     <% } %>
                                                 <% } else { %>
-                                                    /assets/cross.svg" style="width:13px;opacity:0.1
+                                                    /assets/cross.svg" style="width:11px;padding:0 1px;opacity:0.1
                                     <% } %>" value="<%= entries[i][j].done %>" class="btn-small" />
                                     </form>
                                     <% } %>

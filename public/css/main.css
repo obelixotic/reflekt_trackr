@@ -4,17 +4,9 @@
     --color-medium: #20e4a6;
     --color-highlight: rgba(255, 0, 0, 0.9);
     --color-grid: rgba(117, 117, 117, 0.3);
-    --color-text: rgba(255, 255, 255, 0.9);
-    /* --color-dark: #8c8c8c; */
-    /* --color-medium: #bfbfbf; */
-    /* --color-highlight: rgba(255, 0, 0, 0.9); */
-    /* --color-grid: rgba(117, 117, 117, 0.3); */
-    /* --color-text: rgba(255, 255, 255, 0.9); */
-    /* --color-dark: #722ed1; */
-    /* --color-medium: #b37feb; */
-    /* --color-highlight: #fff566; */
-    /* --color-grid: #d3adf7; */
-    /* --color-text: rgba(10, 10, 10, 0.7); */
+    --color-text-heading: rgba(255, 255, 255, 0.9);
+    --color-text-body: rgba(10, 10, 10, 0.8);
+    --color-bg: white;
 }
 
 body {
@@ -24,8 +16,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
-    background-color: white;
-    color: rgba(10, 10, 10, 0.7);
+    background-color: var(--color-bg);
+    color: var(--color-text-body);
     align-self: center;
 }
 
@@ -65,7 +57,7 @@ li a {
 a {
     text-decoration: none;
     /* color: rgb(72, 9, 145); */
-    color: rgba(10, 10, 10, 0.9);
+    color: var(--color-text-body);
     cursor: pointer;
 }
 
@@ -75,7 +67,7 @@ input[type=submit] {
 
 a:visited {
     /* color: rgb(72, 9, 145); */
-    color: rgba(10, 10, 10, 0.9);
+    color: var(--color-text-body);
 }
 
 .add-habit {
@@ -196,7 +188,7 @@ nav {
 
 .container {
     height: 100%;
-    background-color: white;
+    background-color: var(--color-bg);
 }
 
 .days {
@@ -204,7 +196,6 @@ nav {
     margin: 0px;
     border: none;
     padding: 10px 20px 10px 20px;
-    /* background: rgba(10, 10, 10, 0.7); */
     background-color: var(--color-highlight);
 }
 
@@ -236,15 +227,14 @@ li div {
 .day-letter {
     width: 20px;
     text-align: center;
-    /* background-color: rgba(10, 10, 10, 0.8); */
-    color: var(--color-text);
+    color: var(--color-text-heading);
     padding-top: 2px;
     border-radius: 23%;
     margin-left: 9px;
 }
 
 .day-heading {
-    color: var(--color-text);
+    color: var(--color-text-heading);
     margin: 0;
 }
 
@@ -254,15 +244,16 @@ li div {
 }
 
 .cal-days {
-    border: 1px solid rgba(100, 10, 10, 0.1);
+    border: 1px solid rgba(10, 10, 10, 0.1);
     width: 20px;
     height: 20px;
     position: relative;
     bottom: 1.5px;
+    opacity: 0.7;
 }
 
 .cal-week-label {
-    color: rgba(10, 10, 10, 0.9);
+    color: var(--color-text-body);
     margin: 0;
 }
 
@@ -325,27 +316,52 @@ input[type=password] {
 }
 
 .grey {
-    background-color: var(--color-grid);
+    /* default color for grid squares */
+    background-color: #595959;
 }
 
 .violet {
-    background-color: #d3adf7;
+    background-color: #722ed1;
 }
 
 .cyan {
-    background-color: #b5f5ec;
+    background-color: #40a9ff;
 }
 
 .green {
-    background-color: #b7eb8f;
+    background-color: #52c41a;
 }
 
 .yellow {
-    background-color: #fff566;
+    background-color: #faad14;
 }
 
 .orange {
-    background-color: #ff9c6e;
+    background-color: #fa541c;
+}
+
+#white {
+    color: var(--color-text-body);
+}
+
+#violet {
+    color: #722ed1;
+}
+
+#cyan {
+    color: #40a9ff;
+}
+
+#green {
+    color: #52c41a;
+}
+
+#yellow {
+    color: #faad14;
+}
+
+#orange {
+    color: #fa541c;
 }
 
 .category-border {
