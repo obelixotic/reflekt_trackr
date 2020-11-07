@@ -27,27 +27,33 @@
             <p>
                 <label for="name">Name</label>
                 <input type="text" name="name" id="name" value="<%= habit.name %> " />
+                <input type="text" name="icon" id="icon-name" value="<%= habit.icon %>" style="display:none" />
+                <input type="text" name="color" id="color-name" value="<%= habit.color %>" style="display:none" />
             </p>
             <p>
-                <label for="category">Category</label>
-                <input type="text" name="category" id="category" value="<%= habit.category %> " />
+                <div>Icon (optional)</div>
+                <img class="category-icon check" src="/assets/check-zblack.svg" />
+                <img class="category-icon heart" src="/assets/heart-zblack.svg" />
+                <img class="category-icon flower" src="/assets/flower-zblack.svg" />
+                <img class="category-icon paperplane" src="/assets/paperplane-zblack.svg" />
+                <img class="category-icon danger" src="/assets/danger-zblack.svg" />
             </p>
             <p>
-                <input type="text" name="color" id="color-name" value="zblack" style="display:none" />
-                <div>Color / Category</div>
-                <div class=" category-col zblack "></div>
-                <div class="category-col violet "></div>
-                <div class="category-col cyan "></div>
-                <div class="category-col green "></div>
-                <div class="category-col yellow "></div>
-                <div class="category-col red "></div>
+                <div>Color (optional)</div>
+                <div class=" category-col zblack"></div>
+                <div class="category-col violet"></div>
+                <div class="category-col cyan"></div>
+                <div class="category-col green"></div>
+                <div class="category-col yellow"></div>
+                <div class="category-col red"></div>
             </p>
             <div class="edit-buttons">
-                <input type="text" name="color-saved" id="color-saved" style="display: none;" value="<%= habit.color %> ">
                 <input type="submit" value="SAVE"> </form>
         <form class="auth-form delete" action="/habits/<%= id %>/?_method=DELETE" method="POST">
             <input id="delete" type="submit" value="DELETE" />
         </form>
+        <input type="text" id="color-saved" style="display: none;" value="<%= habit.color %>">
+        <input type="text" id="icon-saved" style="display: none;" value="<%= habit.icon %>">
         </div>
     </div>
 </body>

@@ -144,7 +144,7 @@ habits.post('/', isAuthenticated, (req, res) => {
     req.body.done = false;
     req.body.user = req.session.currentUser.username;
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
-    req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
+    // req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
     req.body.date = Date.now();
     // if (req.body.color == 'white') {
     //     req.body.color = 'grey';
@@ -234,14 +234,14 @@ habits.get('/:id/edit', isAuthenticated, (req, res) => {
 
 // update
 habits.put('/:id', isAuthenticated, (req, res) => {
-    // console.log(req.body);
+    console.log(req.body);
     // res.send(`update ${req.params.id}`);
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
-    req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
-    if (req.body.color == 'white') {
-        req.body.color = 'zblack';
-    }
-    Habit.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, category: req.body.category, color: req.body.color } }, (err, result) => {
+    // req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
+    // if (req.body.color == 'white') {
+    //     req.body.color = 'zblack';
+    // }
+    Habit.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, category: req.body.category, color: req.body.color, icon: req.body.icon } }, (err, result) => {
         res.redirect(`/habits/`);
     });
 });
