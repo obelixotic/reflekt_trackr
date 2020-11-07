@@ -63,6 +63,7 @@ a {
 
 input[type=submit] {
     cursor: pointer;
+    border-radius: 8px;
 }
 
 a:visited {
@@ -216,6 +217,7 @@ li div {
     height: 40px;
     background-color: var(--color-dark);
     color: white;
+    border-radius: 8px;
 }
 
 .auth-form label {
@@ -308,6 +310,7 @@ input[type=password] {
     width: 40px;
     display: inline-block;
     margin-right: 10px;
+    border-radius: 8px;
 }
 
 .zblack {
@@ -365,13 +368,19 @@ input[type=password] {
 }
 
 .category-border {
-    border: 1px solid rgba(10, 10, 10, 0.7);
+    border: 2px solid rgba(10, 10, 10, 0.7);
     box-sizing: border-box;
-    box-shadow: 0px 2px 4px grey;
+    box-shadow: 0px 4px 4px grey;
+    border-radius: 8px;
 }
 
 .habit-name {
     text-decoration: revert;
+}
+
+.show-page {
+    width: 100%;
+    text-align: center;
 }
 
 
