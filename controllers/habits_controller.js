@@ -186,7 +186,11 @@ habits.patch('/:id/entry', isAuthenticated, (req, res) => {
     console.log(req.body);
     // res.send(req.body);
     Entry.findByIdAndUpdate(req.params.id, { $set: { done: req.body.done } }, (err, result) => {
-        res.redirect('/habits/');
+        if (req.body.redirect == 'true') {
+            res.redirect(`/habits/${req.body.habit_id}`);
+        } else {
+            res.redirect('/habits/');
+        }
     });
 });
 

@@ -44,17 +44,22 @@
                     </a>
                     <br />
                     <% for (let j=0; j<7; j++) { %>
-                        <%if (entries[j + (7*i)].done === true) { %>
-                            <div class="cal-days grey <%= habit.color %>"></div>
-                            <% } else { %>
-                                <div class=" cal-days "></div>
-                                <% } %>
+                        <form class="entries" action="/habits/<%= entries[j + (7*i)]._id %>/entry?_method=PATCH" method="POST">
+                            <input type="text" value="<%= entries[j + (7*i)].done %>" name="done" style="display:none">
+                            <input type="text" value="true" name="redirect" style="display:none">
+                            <input type="text" value="<%= habit._id %>" name="habit_id" style="display:none">
+                            <%if (entries[j + (7*i)].done === true) { %>
+                                <input type="image" alt="submit" src="/assets/<%= habit.icon %>-<%= habit.color %>.svg" />
+                                <% } else { %> <input type="image" alt="submit" src="/assets/cross.svg" style="width:11px;padding:0 1px;opacity:0.1" />
                                     <% } %>
+                        </form>
+                        <% } %>
                 </li>
                 <% } %>
 
         </ul>
     </div>
+    <%= entries %>
 </body>
 
 </html>

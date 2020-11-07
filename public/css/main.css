@@ -376,6 +376,7 @@ input[type=password] {
 
 .habit-name {
     text-decoration: revert;
+    margin-right: 2px;
 }
 
 .show-page {
