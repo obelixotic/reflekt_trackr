@@ -1,5 +1,10 @@
 $(() => {
     console.log('linked');
+
+    let colorAlreadySelected = $('#color-saved').val();
+
+    $(`.${colorAlreadySelected}`).addClass('category-border');
+
     $('.category-col').click((event) => {
         $('.category-col').removeClass('category-border');
         $(event.target).addClass('category-border');

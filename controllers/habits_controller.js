@@ -146,9 +146,9 @@ habits.post('/', isAuthenticated, (req, res) => {
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
     req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
     req.body.date = Date.now();
-    if (req.body.color == 'white') {
-        req.body.color = 'grey';
-    }
+    // if (req.body.color == 'white') {
+    //     req.body.color = 'grey';
+    // }
     console.log(req.body);
     Habit.create(req.body, (err, createdHabit) => {
         if (err) {
@@ -239,10 +239,10 @@ habits.put('/:id', isAuthenticated, (req, res) => {
     req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
     req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
     if (req.body.color == 'white') {
-        req.body.color = 'grey';
+        req.body.color = 'zblack';
     }
     Habit.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, category: req.body.category, color: req.body.color } }, (err, result) => {
-        res.redirect(`/habits/${req.params.id}`);
+        res.redirect(`/habits/`);
     });
 });
 

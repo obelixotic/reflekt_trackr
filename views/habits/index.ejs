@@ -42,7 +42,7 @@
                         <% } %>
 
                             <li>
-                                <a href="/habits/<%=habits[i]._id%>" id="<%= habits[i].color %>">
+                                <a class="habit-name" href="/habits/<%=habits[i]._id%>" id="<%= habits[i].color %>">
                                     <%= habits[i].name %>
                                 </a>
                                 <br />
@@ -58,7 +58,7 @@
                                                     /assets/check-cyan.png
                                                     <% } else if (habits[i].color == 'yellow') { %>
                                                         /assets/check-yellow.png
-                                                    <% } else if (habits[i].color == 'orange') { %>
+                                                    <% } else if (habits[i].color == 'red') { %>
                                                         /assets/check-orange.png 
                                                 <% } else { %> 
                                                     /assets/check.svg
