@@ -49,7 +49,7 @@
                             <input type="text" value="<%= habit._id %>" name="habit_id" style="display:none">
                             <%if (entries[j + (7*i)].done === true) { %>
                                 <input type="image" alt="submit" src="/assets/check-<%= habit.color %>.svg" />
-                                <% } else { %> <input type="image" alt="submit" src="/assets/cross.svg" style="width:11px;padding:0 1px;opacity:0.1" />
+                                <% } else { %> <input type="image" alt="submit" src="/assets/cross.svg" style="width:11px;padding:0 2px;opacity:0.1" />
                                     <% } %>
                         </form>
                         <% } %>
