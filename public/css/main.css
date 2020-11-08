@@ -184,11 +184,29 @@ nav {
     font-size: 20px;
     color: #8080808c;
     text-align: center;
-    margin-top: 200px;
+    position: relative;
+    top: -16%;
+}
+
+.catch-phrase-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.landing-page-heading {
+    width: 100%;
+    color: white;
+    font-size: 15px;
+    text-align: center;
 }
 
 .container {
     height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 60px;
     background-color: var(--color-bg);
 }
 
