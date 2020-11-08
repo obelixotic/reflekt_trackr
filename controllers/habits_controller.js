@@ -38,21 +38,12 @@ habits.get('/', (req, res) => {
                     tabTitle: 'Home',
                 });
             }
-            // let todaysDate = Date.now(); //46 0
-            let todaysDate = 1605846664602; //47 4
-            // let todaysDate = 1605946664602; //47 6
+            let todaysDate = Date.now(); //46 0
+            // let todaysDate = 1605846664602; //47 4
             // let todaysDate = 1606346664602; //48 3
-            // console.log('day pre: ', getDay(todaysDate)); //3
-            // todaysDate = addDays(todaysDate, (6 - getDay(todaysDate)));
-            // console.log('day post: ', getDay(todaysDate)); //2
-            // console.log(getWeek(todaysDate));
 
             let promArray = [];
             for (habit of allHabits) {
-                // console.log('habit._id: ', habit._id);
-                // let prom = Entry.find({ habit_id: habit._id }, (err, habitEntries) => {
-                //     // console.log('habitEntries: ', habitEntries);
-                // });
 
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
@@ -69,11 +60,9 @@ habits.get('/', (req, res) => {
                 console.log('todaysDate: ', todaysDate, 'week:', getWeek(todaysDate));
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
                 console.log('difference in weeks: ', diffInWeeks);
-                // console.log(getDay(lastDateOfEntry), getDay(todaysDate));
-                // console.log(getWeek(lastDateOfEntry), getWeek(todaysDate), diffInWeeks);
 
                 if (diffInWeeks > 0) {
-                    // if logging-in a different week
+                    // if logging-in on a different week
                     console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1); //1
                     let promArray2 = [];
@@ -86,26 +75,19 @@ habits.get('/', (req, res) => {
                         }
                     }
                     Promise.all(promArray2).then((createdEntries) => {
-                        // console.log(createdEntries);
-                        // let weeksEntries = []
-                        // for (entries of createdEntries) {
-                        // entries.slice(entries.length - 7);
-                        // entries = entries.splice(entries.length - 7, 7);
-                        // weeksEntries.push(entries);
-                        // }
-                        // console.log(weeksEntries);
+                        console.log(createdEntries); //the newly created 7 entries
                         res.render('habits/index.ejs', {
                             habits: allHabits,
                             currentUser: req.session.currentUser,
-                            entries: createdEntries,
+                            entries: [createdEntries],
                             tabTitle: 'Home'
                         });
                     });
                 } else {
-                    // if logging-in the same week
+                    // if logging-in on the same week
                     let weeksEntries = []
                     for (entries of allEntries) {
-                        entries = entries.slice(entries.length - 7);
+                        entries = entries.slice(entries.length - 7); //last 7 are the latest entries
                         // entries = entries.splice(7, 7);
                         weeksEntries.push(entries);
                     }
