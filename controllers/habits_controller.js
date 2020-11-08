@@ -1,6 +1,5 @@
-// THOUGHTS
-// have a habits collection and save the username from the session in it. when user index page loads, find the habit names corresponding to the username and populate the index page - DONE
-// save habit _id in every entry. then i can just look up entry with the habits _id and sort them by the timestamp to display calender view - DONE
+// VERSION : release_v2 deployed on HEROKU
+// https://reflekt-trackr.herokuapp.com/
 
 const express = require('express');
 const Habit = require('../models/habits_model.js');
