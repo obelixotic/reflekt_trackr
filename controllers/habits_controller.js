@@ -38,13 +38,14 @@ habits.get('/', (req, res) => {
                     tabTitle: 'Home',
                 });
             }
-            let todaysDate = Date.now();
-            // let todaysDate = 1605246664602;
-            // let todaysDate = 1605946664602;
-            // let todaysDate = 1606346664602;
+            // let todaysDate = Date.now(); //46 0
+            let todaysDate = 1605846664602; //47 4
+            // let todaysDate = 1605946664602; //47 6
+            // let todaysDate = 1606346664602; //48 3
             // console.log('day pre: ', getDay(todaysDate)); //3
             // todaysDate = addDays(todaysDate, (6 - getDay(todaysDate)));
             // console.log('day post: ', getDay(todaysDate)); //2
+            // console.log(getWeek(todaysDate));
 
             let promArray = [];
             for (habit of allHabits) {
@@ -63,8 +64,11 @@ habits.get('/', (req, res) => {
                 //lets check if the week has changed
                 let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
-                // console.log(lastDateOfEntry);
+                // console.log(allEntries);
+                console.log('lastDateOfEntry: ', lastDateOfEntry, 'week:', getWeek(lastDateOfEntry));
+                console.log('todaysDate: ', todaysDate, 'week:', getWeek(todaysDate));
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
+                console.log('difference in weeks: ', diffInWeeks);
                 // console.log(getDay(lastDateOfEntry), getDay(todaysDate));
                 // console.log(getWeek(lastDateOfEntry), getWeek(todaysDate), diffInWeeks);
 
@@ -94,7 +98,7 @@ habits.get('/', (req, res) => {
                             habits: allHabits,
                             currentUser: req.session.currentUser,
                             entries: createdEntries,
-                            tabTitle: 'Home',
+                            tabTitle: 'Home'
                         });
                     });
                 } else {
@@ -162,7 +166,7 @@ habits.post('/', isAuthenticated, (req, res) => {
                 let promArray = [];
                 for (let i = 0; i < 7; i++) {
                     let diff = i - creationDayOfWeek;
-                    let entryDate = subDays(creationDate, diff);
+                    let entryDate = addDays(creationDate, diff);
                     console.log(entryDate);
                     let prom = Entry.create({ habit_id: createdHabit['_id'], date: entryDate });
                     promArray.push(prom);
