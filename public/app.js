@@ -4,7 +4,8 @@ $(() => {
     let colorAlreadySelected = $('#color-saved').val();
     let iconAlreadySelected = $('#icon-saved').val();
 
-    console.log(iconAlreadySelected, colorAlreadySelected);
+    console.log(iconAlreadySelected);
+    console.log(colorAlreadySelected);
 
     $(`.${colorAlreadySelected}`).addClass('category-border');
     $(`.${iconAlreadySelected}`).addClass('category-border');
