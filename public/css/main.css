@@ -41,7 +41,8 @@ li {
 }
 
 li a {
-    width: 120px;
+    /* width: 120px; */
+    width: 36%;
     margin-bottom: 20px;
     font-size: 14px;
 }
