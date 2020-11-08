@@ -1,7 +1,3 @@
-// THOUGHTS
-// have a habits collection and save the username from the session in it. when user index page loads, find the habit names corresponding to the username and populate the index page - DONE
-// save habit _id in every entry. then i can just look up entry with the habits _id and sort them by the timestamp to display calender view - DONE
-
 const express = require('express');
 const Habit = require('../models/habits_model.js');
 const User = require('../models/users_model.js');
@@ -141,38 +137,42 @@ habits.get('/new', isAuthenticated, (req, res) => {
 
 //create
 habits.post('/', isAuthenticated, (req, res) => {
-    req.body.done = false;
-    req.body.user = req.session.currentUser.username;
-    req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
-    // req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
-    req.body.date = Date.now();
-    // if (req.body.color == 'white') {
-    //     req.body.color = 'grey';
-    // }
-    console.log(req.body);
-    Habit.create(req.body, (err, createdHabit) => {
-        if (err) {
-            console.log(err);
-        } else {
-            // console.log(createdHabit);
-            // adding dates to each entry
-            let creationDate = Date.now();
-            let creationDayOfWeek = getDay(creationDate);
+    if (req.body.name == '' || (req.body.name.split(' ')[0] == '' && req.body.name.split(' ')[1] == '')) {
+        res.redirect('/habits/new');
+    } else {
+        req.body.done = false;
+        req.body.user = req.session.currentUser.username;
+        req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
+        // req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
+        req.body.date = Date.now();
+        // if (req.body.color == 'white') {
+        //     req.body.color = 'grey';
+        // }
+        console.log(req.body);
+        Habit.create(req.body, (err, createdHabit) => {
+            if (err) {
+                console.log(err);
+            } else {
+                // console.log(createdHabit);
+                // adding dates to each entry
+                let creationDate = Date.now();
+                let creationDayOfWeek = getDay(creationDate);
 
-            // create default false entries for a week
-            let promArray = [];
-            for (let i = 0; i < 7; i++) {
-                let diff = i - creationDayOfWeek;
-                let entryDate = subDays(creationDate, diff);
-                console.log(entryDate);
-                let prom = Entry.create({ habit_id: createdHabit['_id'], date: entryDate });
-                promArray.push(prom);
+                // create default false entries for a week
+                let promArray = [];
+                for (let i = 0; i < 7; i++) {
+                    let diff = i - creationDayOfWeek;
+                    let entryDate = subDays(creationDate, diff);
+                    console.log(entryDate);
+                    let prom = Entry.create({ habit_id: createdHabit['_id'], date: entryDate });
+                    promArray.push(prom);
+                }
+                Promise.all(promArray).then((allEntries) => {
+                    res.redirect('/habits/');
+                });
             }
-            Promise.all(promArray).then((allEntries) => {
-                res.redirect('/habits/');
-            });
-        }
-    });
+        });
+    }
 });
 
 // make a daily entry
