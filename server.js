@@ -1,4 +1,5 @@
-// MASTER BRANCH FOR NEW FEATURES/EDITS
+// VERSION: release_v3
+// date issues sorted, minor CSS fixes
 
 // DEPENDENCIES
 const express = require('express');
