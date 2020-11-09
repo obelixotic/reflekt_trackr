@@ -45,7 +45,7 @@
                     <% for (let j=0; j<7; j++) { %>
                         <form class="entries" action="/habits/<%= entries[j + (7*i)]._id %>/entry?_method=PATCH" method="POST">
                             <input type="text" value="<%= entries[j + (7*i)].done %>" name="done" style="display:none">
-                            <input type="text" value="true" name="redirect" style="display:none">
+                            <input type="text" value="true" name="redirectToShow" style="display:none">
                             <input type="text" value="<%= habit._id %>" name="habit_id" style="display:none">
                             <%if (entries[j + (7*i)].done === true) { %>
                                 <input type="image" alt="submit" src="/assets/check-<%= habit.color %>.svg" />

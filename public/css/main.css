@@ -261,7 +261,7 @@ li div {
 
 .cal-view {
     display: flex;
-    flex-flow: column-reverse;
+    flex-flow: column;
 }
 
 .cal-days {
