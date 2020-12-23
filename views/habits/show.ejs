@@ -23,9 +23,8 @@
         </div>
         <ul>
             <li class="days">
-                <a class="day-heading">
-                </a>
-                <br/>
+                <a class="day-heading"> </a>
+                <br />
                 <div class="day-letter">S</div>
                 <div class="day-letter">M</div>
                 <div class="day-letter">T</div>
@@ -35,27 +34,41 @@
                 <div class="day-letter">S</div>
             </li>
         </ul>
-        <ul class="cal-view">
+        <!-- <ul class="cal-view">
             <% for (let i=0; i<entries.length/7; i++) { %>
                 <li class="cal-rows">
-                    <a class="cal-week-label">
-                        Week <%= i+1 %>
-                    </a>
+                    <a class="cal-week-label"> Week <%= i+1 %> </a>
                     <br />
                     <% for (let j=0; j<7; j++) { %>
                         <form class="entries" action="/habits/<%= entries[j + (7*i)]._id %>/entry?_method=PATCH" method="POST">
-                            <input type="text" value="<%= entries[j + (7*i)].done %>" name="done" style="display:none">
-                            <input type="text" value="true" name="redirectToShow" style="display:none">
-                            <input type="text" value="<%= habit._id %>" name="habit_id" style="display:none">
+                            <input type="text" value="<%= entries[j + (7*i)].done %>" name="done" style="display: none" />
+                            <input type="text" value="true" name="redirectToShow" style="display: none" />
+                            <input type="text" value="<%= habit._id %>" name="habit_id" style="display: none" />
                             <%if (entries[j + (7*i)].done === true) { %>
                                 <input type="image" alt="submit" src="/assets/check-<%= habit.color %>.svg" />
-                                <% } else { %> <input type="image" alt="submit" src="/assets/cross.svg" style="width:11px;padding:0 2px;opacity:0.1" />
+                                <% } else { %>
+                                    <input type="image" alt="submit" src="/assets/cross.svg" style="width: 11px; padding: 0 2px; opacity: 0.1" />
                                     <% } %>
                         </form>
                         <% } %>
                 </li>
                 <% } %>
-
+        </ul> -->
+        <ul class="cal-view">
+            <% for (let i=0; i<entries.length/7; i++) { %>
+                <li class="cal-rows">
+                    <a class="cal-week-label"> Week <%= i+1 %> </a>
+                    <br />
+                    <% for (let j=0; j<7; j++) { %>
+                        <%if (entries[j + (7*i)].done ===
+          true) { %>
+                            <div class="cal-days grey <%= habit.color %>"></div>
+                            <% } else { %>
+                                <div class="cal-days"></div>
+                                <% } %>
+                                    <% } %>
+                </li>
+                <% } %>
         </ul>
     </div>
 </body>
