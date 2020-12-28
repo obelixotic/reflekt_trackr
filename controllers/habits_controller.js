@@ -1,41 +1,43 @@
-const express = require('express');
-const Habit = require('../models/habits_model.js');
-const User = require('../models/users_model.js');
-const Entry = require('../models/entries_model.js');
+const express = require("express");
+const Habit = require("../models/habits_model.js");
+const User = require("../models/users_model.js");
+const Entry = require("../models/entries_model.js");
 const habits = express.Router();
-const getDay = require('date-fns/getDay');
-const getDate = require('date-fns/getDate');
-const subDays = require('date-fns/subDays');
-const addDays = require('date-fns/addDays');
-const isSameWeek = require('date-fns/isSameWeek');
-const getMonth = require('date-fns/getMonth');
-const isSameMonth = require('date-fns/isSameMonth');
-const getWeek = require('date-fns/getWeek');
+const getDay = require("date-fns/getDay");
+const getDate = require("date-fns/getDate");
+const subDays = require("date-fns/subDays");
+const addDays = require("date-fns/addDays");
+const isSameWeek = require("date-fns/isSameWeek");
+const getMonth = require("date-fns/getMonth");
+const isSameMonth = require("date-fns/isSameMonth");
+const getWeek = require("date-fns/getWeek");
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
         return next();
     } else {
-        res.redirect('/sessions/new');
+        res.redirect("/sessions/new");
     }
 };
 
 // ROUTES
 // index
-habits.get('/', (req, res) => {
+habits.get("/", (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
     if (req.session.currentUser) {
         // if authenticated
-        let userHabits = Habit.find({ user: req.session.currentUser.username }).sort({ color: 1 });
+        let userHabits = Habit.find({
+            user: req.session.currentUser.username,
+        }).sort({ color: 1 });
         userHabits.exec((err, allHabits) => {
             // console.log(allHabits);
             if (allHabits.length == 0) {
-                res.render('habits/index.ejs', {
-                    habits: '',
+                res.render("habits/index.ejs", {
+                    habits: "",
                     currentUser: req.session.currentUser,
-                    entries: '',
-                    tabTitle: 'Home',
+                    entries: "",
+                    tabTitle: "Home",
                 });
             }
             let todaysDate = Date.now(); //46 0
@@ -44,7 +46,6 @@ habits.get('/', (req, res) => {
 
             let promArray = [];
             for (habit of allHabits) {
-
                 //sort date wise first
                 let query = Entry.find({ habit_id: habit._id }).sort({ date: 1 });
                 const prom = query.exec();
@@ -56,12 +57,17 @@ habits.get('/', (req, res) => {
                 let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
                 // console.log(allEntries);
-                console.log('lastDateOfEntry: ', lastDateOfEntry, 'week:', getWeek(lastDateOfEntry));
-                console.log('todaysDate: ', todaysDate, 'week:', getWeek(todaysDate));
+                console.log(
+                    "lastDateOfEntry: ",
+                    lastDateOfEntry,
+                    "week:",
+                    getWeek(lastDateOfEntry)
+                );
+                console.log("todaysDate: ", todaysDate, "week:", getWeek(todaysDate));
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
-                console.log('difference in weeks: ', diffInWeeks);
+                console.log("difference in weeks: ", diffInWeeks);
 
-                if (diffInWeeks > 0) {
+                if (diffInWeeks != 1) {
                     // if logging-in on a different week
                     console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1); //1
@@ -70,65 +76,73 @@ habits.get('/', (req, res) => {
                         for (let i = 0; i < 7 * diffInWeeks; i++) {
                             let entryDate = addDays(firstDayForEntry, i);
                             console.log(entryDate);
-                            let prom2 = Entry.create({ habit_id: habit['_id'], date: entryDate });
+                            let prom2 = Entry.create({
+                                habit_id: habit["_id"],
+                                date: entryDate,
+                            });
                             promArray2.push(prom2);
                         }
                     }
                     Promise.all(promArray2).then((createdEntries) => {
                         console.log(createdEntries); //the newly created 7 entries
-                        res.render('habits/index.ejs', {
+                        res.render("habits/index.ejs", {
                             habits: allHabits,
                             currentUser: req.session.currentUser,
                             entries: [createdEntries],
-                            tabTitle: 'Home'
+                            tabTitle: "Home",
                         });
                     });
                 } else {
                     // if logging-in on the same week
-                    let weeksEntries = []
+                    let weeksEntries = [];
                     for (entries of allEntries) {
                         entries = entries.slice(entries.length - 7); //last 7 are the latest entries
                         // entries = entries.splice(7, 7);
                         weeksEntries.push(entries);
                     }
                     // console.log(weeksEntries);
-                    res.render('habits/index.ejs', {
+                    res.render("habits/index.ejs", {
                         habits: allHabits,
                         currentUser: req.session.currentUser,
                         entries: weeksEntries,
-                        tabTitle: 'Home'
+                        tabTitle: "Home",
                     });
                 }
             });
         });
     } else {
         // if not authenticated
-        res.render('habits/index.ejs', {
-            habits: '',
-            currentUser: '',
-            entries: '',
-            tabTitle: 'Home'
+        res.render("habits/index.ejs", {
+            habits: "",
+            currentUser: "",
+            entries: "",
+            tabTitle: "Home",
         });
     }
 });
 
 // new
-habits.get('/new', isAuthenticated, (req, res) => {
+habits.get("/new", isAuthenticated, (req, res) => {
     // res.send('new');
-    res.render('habits/new.ejs', {
-        tabTitle: 'New habit',
-        currentUser: req.session.currentUser
+    res.render("habits/new.ejs", {
+        tabTitle: "New habit",
+        currentUser: req.session.currentUser,
     });
 });
 
 //create
-habits.post('/', isAuthenticated, (req, res) => {
-    if (req.body.name == '' || (req.body.name.split(' ')[0] == '' && req.body.name.split(' ')[1] == '')) {
-        res.redirect('/habits/new');
+habits.post("/", isAuthenticated, (req, res) => {
+    if (
+        req.body.name == "" ||
+        (req.body.name.split(" ")[0] == "" && req.body.name.split(" ")[1] == "")
+    ) {
+        res.redirect("/habits/new");
     } else {
         req.body.done = false;
         req.body.user = req.session.currentUser.username;
-        req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
+        req.body.name =
+            req.body.name.toLowerCase().charAt(0).toUpperCase() +
+            req.body.name.toLowerCase().slice(1);
         // req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
         req.body.date = Date.now();
         // if (req.body.color == 'white') {
@@ -150,11 +164,14 @@ habits.post('/', isAuthenticated, (req, res) => {
                     let diff = i - creationDayOfWeek;
                     let entryDate = addDays(creationDate, diff);
                     console.log(entryDate);
-                    let prom = Entry.create({ habit_id: createdHabit['_id'], date: entryDate });
+                    let prom = Entry.create({
+                        habit_id: createdHabit["_id"],
+                        date: entryDate,
+                    });
                     promArray.push(prom);
                 }
                 Promise.all(promArray).then((allEntries) => {
-                    res.redirect('/habits/');
+                    res.redirect("/habits/");
                 });
             }
         });
@@ -162,7 +179,7 @@ habits.post('/', isAuthenticated, (req, res) => {
 });
 
 // make a daily entry
-habits.patch('/:id/entry', isAuthenticated, (req, res) => {
+habits.patch("/:id/entry", isAuthenticated, (req, res) => {
     // req.body.habit_id = req.params.id;
     if (req.body.done === "false") {
         req.body.done = true;
@@ -171,17 +188,20 @@ habits.patch('/:id/entry', isAuthenticated, (req, res) => {
     }
     console.log(req.body);
     // res.send(req.body);
-    Entry.findByIdAndUpdate(req.params.id, { $set: { done: req.body.done } }, (err, result) => {
-        if (req.body.redirectToShow == 'true') {
-            res.redirect(`/habits/${req.body.habit_id}`);
-        } else {
-            res.redirect('/habits/');
+    Entry.findByIdAndUpdate(
+        req.params.id, { $set: { done: req.body.done } },
+        (err, result) => {
+            if (req.body.redirectToShow == "true") {
+                res.redirect(`/habits/${req.body.habit_id}`);
+            } else {
+                res.redirect("/habits/");
+            }
         }
-    });
+    );
 });
 
 // show
-habits.get('/:id', isAuthenticated, (req, res) => {
+habits.get("/:id", isAuthenticated, (req, res) => {
     // res.send(`show ${req.params.id}`);
     Habit.findById(req.params.id, (err, foundHabit) => {
         // let query = Entry.find({ habit_id: foundHabit._id }, (err, habitEntries) => {
@@ -194,7 +214,7 @@ habits.get('/:id', isAuthenticated, (req, res) => {
         const prom = query.exec();
         prom.then((allEntries) => {
             // console.log(allEntries);
-            res.render('habits/show.ejs', {
+            res.render("habits/show.ejs", {
                 tabTitle: foundHabit.name,
                 currentUser: req.session.currentUser,
                 habit: foundHabit,
@@ -209,40 +229,54 @@ habits.get('/:id', isAuthenticated, (req, res) => {
 });
 
 // edit
-habits.get('/:id/edit', isAuthenticated, (req, res) => {
+habits.get("/:id/edit", isAuthenticated, (req, res) => {
     // res.send(`edit ${req.params.id}`);
     Habit.findById(req.params.id, (err, foundHabit) => {
         console.log(foundHabit);
-        res.render('habits/edit.ejs', {
-            tabTitle: 'Edit habit',
+        res.render("habits/edit.ejs", {
+            tabTitle: "Edit habit",
             currentUser: req.session.currentUser,
             habit: foundHabit,
-            id: req.params.id
+            id: req.params.id,
         });
     });
 });
 
 // update
-habits.put('/:id', isAuthenticated, (req, res) => {
+habits.put("/:id", isAuthenticated, (req, res) => {
     console.log(req.body);
     // res.send(`update ${req.params.id}`);
-    req.body.name = req.body.name.toLowerCase().charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1);
+    req.body.name =
+        req.body.name.toLowerCase().charAt(0).toUpperCase() +
+        req.body.name.toLowerCase().slice(1);
     // req.body.category = req.body.category.toLowerCase().charAt(0).toUpperCase() + req.body.category.toLowerCase().slice(1);
     // if (req.body.color == 'white') {
     //     req.body.color = 'zblack';
     // }
-    Habit.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, category: req.body.category, color: req.body.color, icon: req.body.icon } }, (err, result) => {
-        res.redirect(`/habits/`);
-    });
+    Habit.findByIdAndUpdate(
+        req.params.id, {
+            $set: {
+                name: req.body.name,
+                category: req.body.category,
+                color: req.body.color,
+                icon: req.body.icon,
+            },
+        },
+        (err, result) => {
+            res.redirect(`/habits/`);
+        }
+    );
 });
 
 // delete
-habits.delete('/:id', isAuthenticated, (req, res) => {
+habits.delete("/:id", isAuthenticated, (req, res) => {
     // res.send(`delete ${req.params.id}`);
     Habit.findByIdAndDelete(req.params.id, (err, toDeleteHabit) => {
-        Entry.deleteMany({ habit_id: toDeleteHabit._id }, (err, toDeleteEntries) => {
-            res.redirect('/habits');
-        });
+        Entry.deleteMany({ habit_id: toDeleteHabit._id },
+            (err, toDeleteEntries) => {
+                res.redirect("/habits");
+            }
+        );
     });
 });
 
