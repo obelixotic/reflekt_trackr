@@ -67,7 +67,7 @@ habits.get("/", (req, res) => {
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
                 console.log("difference in weeks: ", diffInWeeks);
 
-                if (diffInWeeks != 0) {
+                if (diffInWeeks > 0) {
                     // if logging-in on a different week
                     console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1); //1
