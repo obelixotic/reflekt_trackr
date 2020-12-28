@@ -68,9 +68,9 @@ habits.get("/", (req, res) => {
                 console.log("difference in weeks: ", diffInWeeks);
 
                 // if logging-in on a different week
-                if (diffInWeeks > 0 || diffInWeeks < 0) {
+                if (diffInWeeks != 0) {
                     if (diffInWeeks < 0) {
-                        diffInWeeks = 1; //if the year has changed
+                        diffInWeeks = diffInWeeks + 52; //if the year has changed
                     }
                     console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1); //1
