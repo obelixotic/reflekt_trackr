@@ -40,6 +40,9 @@ habits.get("/", (req, res) => {
                     tabTitle: "Home",
                 });
             }
+
+            console.log(req.session.scrollTop);
+
             let todaysDate = Date.now(); //46 0
             // let todaysDate = 1605846664602; //47 4
             // let todaysDate = 1606346664602; //48 3
@@ -57,15 +60,15 @@ habits.get("/", (req, res) => {
                 let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
                 // console.log(allEntries);
-                console.log(
-                    "lastDateOfEntry: ",
-                    lastDateOfEntry,
-                    "week:",
-                    getWeek(lastDateOfEntry)
-                );
-                console.log("todaysDate: ", todaysDate, "week:", getWeek(todaysDate));
+                // console.log(
+                //     "lastDateOfEntry: ",
+                //     lastDateOfEntry,
+                //     "week:",
+                //     getWeek(lastDateOfEntry)
+                // );
+                // console.log("todaysDate: ", todaysDate, "week:", getWeek(todaysDate));
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
-                console.log("difference in weeks: ", diffInWeeks);
+                // console.log("difference in weeks: ", diffInWeeks);
 
                 // if logging-in on a different week
                 if (diffInWeeks != 0) {

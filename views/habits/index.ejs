@@ -5,7 +5,6 @@
     <%- include ('../partials/head.ejs') %>
 </head>
 
-
 <body>
     <nav>
         <%- include ('../partials/nav.ejs') %>
@@ -14,11 +13,10 @@
         <% if (currentUser) { %>
             <div class="heading-bar">
                 <h2 class="page-heading">
-                    <% if (entries) { %>
-                        MY WEEKLY TRACKER
-                        <% } else { %>
-                            ADD HABITS
-                            <% } %>
+                    <% if (entries) { %> MY WEEKLY TRACKER
+                        <% } else { %> ADD HABITS
+                            <% }
+          %>
                 </h2>
                 <form class="add-habit" action="/habits/new" method="GET">
                     <input type="image" alt="submit" src="/assets/plus-white.svg" />
@@ -29,7 +27,7 @@
                     <% if(i==0) { %>
                         <li class="days">
                             <a class="day-heading">HABITS</a>
-                            <br/>
+                            <br />
                             <div class="day-letter">S</div>
                             <div class="day-letter">M</div>
                             <div class="day-letter">T</div>
@@ -47,7 +45,7 @@
                                 <br />
                                 <% for (let j=0; j<7; j++) { %>
                                     <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
-                                        <input type="text" value="<%= entries[i][j].done %>" name="done" style="display:none">
+                                        <input type="text" value="<%= entries[i][j].done %>" name="done" style="display: none" />
                                         <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
                                             /assets/check-<%= habits[i].color %>.svg
                                             
@@ -62,9 +60,7 @@
             </ul>
             <% } else { %>
                 <div class="heading-bar">
-                    <h2 class="landing-page-heading">
-                        YOUR PERSONAL HABIT TRACKER
-                    </h2>
+                    <h2 class="landing-page-heading">YOUR PERSONAL HABIT TRACKER</h2>
                 </div>
 
                 <div class="catch-phrase-container">
@@ -73,7 +69,6 @@
                     </div>
                 </div>
                 <% } %>
-
     </div>
 </body>
 

@@ -1,40 +1,39 @@
-const express = require('express');
-const bcrypt = require('bcrypt');
-const User = require('../models/users_model');
+const express = require("express");
+const bcrypt = require("bcrypt");
+const User = require("../models/users_model");
 const sessions = express.Router();
 
 // ROUTES
 // new session
-sessions.get('/new', (req, res) => {
-    res.render('sessions/new.ejs', {
+sessions.get("/new", (req, res) => {
+    res.render("sessions/new.ejs", {
         currentUser: req.session.currentUser,
-        tabTitle: 'Login',
+        tabTitle: "Login",
     });
 });
 
 // create session
-sessions.post('/', (req, res) => {
+sessions.post("/", (req, res) => {
     User.findOne({ username: req.body.username }, (err, foundUser) => {
         // console.log(foundUser);
         if (!foundUser) {
-            res.redirect('/sessions/new');
+            res.redirect("/sessions/new");
         } else {
             if (bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser;
-                res.redirect('/');
+                res.redirect("/");
             } else {
-                res.redirect('/sessions/new');
+                res.redirect("/sessions/new");
             }
         }
     });
 });
 
 // delete session
-sessions.delete('/', (req, res) => {
+sessions.delete("/", (req, res) => {
     req.session.destroy(() => {
-        res.redirect('/')
+        res.redirect("/");
     });
 });
-
 
 module.exports = sessions;
