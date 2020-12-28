@@ -46,11 +46,11 @@
                             <input type="text" value="<%= habit._id %>" name="habit_id" style="display: none" />
                             <%if (entries[j + (7*i)].done === true) { %>
                                 <div class="cal-days grey <%= habit.color %>">
-                                    <input type="hidden" alt="submit" src="/assets/check-<%= habit.color %>.svg" />
+                                    <input type="image" alt="submit" src="/assets/check-<%= habit.color %>.svg" style="opacity: 0" />
                                 </div>
                                 <% } else { %>
                                     <div class="cal-days">
-                                        <input type="hidden" alt="submit" src="/assets/cross.svg" style="width: 11px; padding: 0 2px; opacity: 0.1" />
+                                        <input type="image" alt="submit" src="/assets/cross.svg" style="width: 11px; padding: 0 2px; opacity: 0" />
                                     </div>
                                     <% } %>
                         </form>
