@@ -2,7 +2,7 @@ $(() => {
     console.log("linked");
 
     $(document).on("scroll", (event) => {
-        localStorage.setItem("scrollY", window.pageYOffset);
+        localStorage.setItem("scrollY", window.pageYOffset - 11);
     });
 
     $(document).ready(() => {
