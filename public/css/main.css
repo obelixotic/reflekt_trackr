@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 :root {
     --color-dark: #12b482;
     --color-medium: #20e4a6;
@@ -15,7 +15,7 @@ body {
     height: 720px;
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: var(--color-bg);
     color: var(--color-text-body);
     align-self: center;
@@ -51,7 +51,7 @@ li a {
     margin: 0 7px;
 }
 
-.entries input[type=image] {
+.entries input[type="image"] {
     width: 15px;
 }
 
@@ -62,7 +62,7 @@ a {
     cursor: pointer;
 }
 
-input[type=submit] {
+input[type="submit"] {
     cursor: pointer;
     border-radius: 8px;
 }
@@ -78,7 +78,7 @@ a:visited {
     margin-right: 20px;
 }
 
-.add-habit input[type=image] {
+.add-habit input[type="image"] {
     width: 15px;
 }
 
@@ -100,7 +100,7 @@ nav {
 .welcome {
     margin-left: 20px;
     color: white;
-    font-family: 'Montserrat', 'semi-bold';
+    font-family: "Montserrat", "semi-bold";
     font-size: 18px;
 }
 
@@ -230,7 +230,7 @@ li div {
     line-height: 40px;
 }
 
-.auth-form input[type=submit] {
+.auth-form input[type="submit"] {
     border: none;
     width: 90px;
     height: 40px;
@@ -318,9 +318,9 @@ li div {
     background-color: var(--color-grid);
 }
 
-input[type=text],
-input[type=password] {
-    font-family: 'Montserrat', sans-serif;
+input[type="text"],
+input[type="password"] {
+    font-family: "Montserrat", sans-serif;
     height: 20px;
 }
 
@@ -408,3 +408,7 @@ input[type=password] {
     margin: 0;
     font-size: 16px;
 } */
+
+#date {
+    font-size: 7px;
+}

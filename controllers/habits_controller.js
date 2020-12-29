@@ -1,16 +1,17 @@
 const express = require("express");
 const Habit = require("../models/habits_model.js");
-const User = require("../models/users_model.js");
+// const User = require("../models/users_model.js");
 const Entry = require("../models/entries_model.js");
 const habits = express.Router();
 const getDay = require("date-fns/getDay");
-const getDate = require("date-fns/getDate");
-const subDays = require("date-fns/subDays");
 const addDays = require("date-fns/addDays");
-const isSameWeek = require("date-fns/isSameWeek");
-const getMonth = require("date-fns/getMonth");
-const isSameMonth = require("date-fns/isSameMonth");
 const getWeek = require("date-fns/getWeek");
+// const { getMonth } = require("date-fns");
+const getDate = require("date-fns/getDate");
+const getMonth = require("date-fns/getMonth");
+// const subDays = require("date-fns/subDays");
+// const isSameWeek = require("date-fns/isSameWeek");
+// const isSameMonth = require("date-fns/isSameMonth");
 
 // MIDDLEWARE
 const isAuthenticated = (req, res, next) => {
@@ -38,10 +39,12 @@ habits.get("/", (req, res) => {
                     currentUser: req.session.currentUser,
                     entries: "",
                     tabTitle: "Home",
+                    sundayDate: getDate(lastDateOfEntry - 86400000 * 6),
+                    sundayMonth: getMonth(lastDateOfEntry - 86400000 * 6),
+                    saturdayDate: getDate(lastDateOfEntry),
+                    saturdayMonth: getMonth(lastDateOfEntry) + 1,
                 });
             }
-
-            console.log(req.session.scrollTop);
 
             let todaysDate = Date.now(); //46 0
             // let todaysDate = 1605846664602; //47 4
@@ -60,12 +63,12 @@ habits.get("/", (req, res) => {
                 let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
                 // console.log(allEntries);
-                // console.log(
-                //     "lastDateOfEntry: ",
-                //     lastDateOfEntry,
-                //     "week:",
-                //     getWeek(lastDateOfEntry)
-                // );
+                console.log(
+                    "lastDateOfEntry: ",
+                    lastDateOfEntry,
+                    "week:",
+                    getWeek(lastDateOfEntry)
+                );
                 // console.log("todaysDate: ", todaysDate, "week:", getWeek(todaysDate));
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
                 // console.log("difference in weeks: ", diffInWeeks);
@@ -77,6 +80,7 @@ habits.get("/", (req, res) => {
                     }
                     console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1); //1
+                    console.log(firstDayForEntry);
                     let promArray2 = [];
                     for (habit of allHabits) {
                         for (let i = 0; i < 7 * diffInWeeks; i++) {
@@ -112,6 +116,20 @@ habits.get("/", (req, res) => {
                         currentUser: req.session.currentUser,
                         entries: weeksEntries,
                         tabTitle: "Home",
+                        sundayDate: getDate(lastDateOfEntry - 86400000 * 6),
+                        sundayMonth: getMonth(lastDateOfEntry - 86400000 * 6) + 1,
+                        mondayDate: getDate(lastDateOfEntry - 86400000 * 5),
+                        mondayMonth: getMonth(lastDateOfEntry - 86400000 * 5) + 1,
+                        tuesdayDate: getDate(lastDateOfEntry - 86400000 * 4),
+                        tuesdayMonth: getMonth(lastDateOfEntry - 86400000 * 4) + 1,
+                        wednesdayDate: getDate(lastDateOfEntry - 86400000 * 3),
+                        wednesdayMonth: getMonth(lastDateOfEntry - 86400000 * 3) + 1,
+                        thursdayDate: getDate(lastDateOfEntry - 86400000 * 2),
+                        thursdayMonth: getMonth(lastDateOfEntry - 86400000 * 2) + 1,
+                        fridayDate: getDate(lastDateOfEntry - 86400000 * 1),
+                        fridayMonth: getMonth(lastDateOfEntry - 86400000 * 1) + 1,
+                        saturdayDate: getDate(lastDateOfEntry),
+                        saturdayMonth: getMonth(lastDateOfEntry) + 1,
                     });
                 }
             });
