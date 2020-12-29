@@ -276,10 +276,10 @@ li div {
 .cal-week-label {
     color: var(--color-text-body);
     margin: 0;
-    font-size: 11px;
+    /* font-size: 11px;
     text-align: left;
     margin-top: -1px;
-    padding-top: 4px;
+    padding-top: 4px; */
 }
 
 .cal-rows {

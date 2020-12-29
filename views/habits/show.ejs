@@ -42,11 +42,11 @@
                     </a>
                     <br />
                     <% for (let j=0; j<7; j++) { %>
-                        <form class="entries" action="/habits/<%= entries[j + (7*i)]._id %>/entry?_method=PATCH" method="POST">
+                        <form action="/habits/<%= entries[j + (7*i)]._id %>/entry?_method=PATCH" method="POST">
                             <input type="text" value="<%= entries[j + (7*i)].done %>" name="done" style="display: none" />
                             <input type="text" value="true" name="redirectToShow" style="display: none" />
                             <input type="text" value="<%= habit._id %>" name="habit_id" style="display: none" />
-                            <%if (entries[j + (7*i)].done === true) { %>
+                            <% if (entries[j + (7*i)].done === true) { %>
                                 <div class="cal-days grey <%= habit.color %>">
                                     <input type="image" alt="submit" src="/assets/check-<%= habit.color %>.svg" style="opacity: 0" />
                                 </div>
