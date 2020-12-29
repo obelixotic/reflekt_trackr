@@ -73,12 +73,12 @@ habits.get("/", (req, res) => {
                 let diffInWeeks = 0;
                 let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
                 // console.log(allEntries);
-                console.log(
-                    "lastDateOfEntry: ",
-                    lastDateOfEntry,
-                    "week:",
-                    getWeek(lastDateOfEntry)
-                );
+                // console.log(
+                //     "lastDateOfEntry: ",
+                //     lastDateOfEntry,
+                //     "week:",
+                //     getWeek(lastDateOfEntry)
+                // );
                 // console.log("todaysDate: ", todaysDate, "week:", getWeek(todaysDate));
                 diffInWeeks = getWeek(todaysDate) - getWeek(lastDateOfEntry);
                 // console.log("difference in weeks: ", diffInWeeks);
