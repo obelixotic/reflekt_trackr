@@ -37,7 +37,9 @@
         <ul class="cal-view">
             <% for (let i=0; i<entries.length/7; i++) { %>
                 <li class="cal-rows">
-                    <a class="cal-week-label"> Week <%= i+1 %> </a>
+                    <a class="cal-week-label">
+                        <%= weeks[i] %>
+                    </a>
                     <br />
                     <% for (let j=0; j<7; j++) { %>
                         <form class="entries" action="/habits/<%= entries[j + (7*i)]._id %>/entry?_method=PATCH" method="POST">

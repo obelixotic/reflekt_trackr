@@ -247,16 +247,37 @@ habits.get("/:id", isAuthenticated, (req, res) => {
 
         const prom = query.exec();
         prom.then((allEntries) => {
+            let lastDateOfEntry = allEntries[allEntries.length - 1].date;
             // console.log(allEntries);
+            // console.log(lastDateOfEntry);
+            let weekLabels = [];
+            let allDates = [];
+            for (let i = 0; i < allEntries.length / 7; i++) {
+                for (let j = 0; j < 7; j++) {
+                    let d = allEntries[j + 7 * i].date;
+                    let date = getDate(d);
+                    let month = getMonth(d) + 1;
+                    let dateStr = `${date}/${month}`;
+                    // console.log(dateStr);
+                    allDates.push(dateStr);
+                }
+            }
+
+            for (let i = 0; i < allDates.length; i += 7) {
+                weekStartDate = allDates[i];
+                weekEndDate = allDates[i + 6];
+                let label = `${weekStartDate} - ${weekEndDate}`;
+                weekLabels.push(label);
+            }
+            // console.log(weekLabels);
+
             res.render("habits/show.ejs", {
                 tabTitle: foundHabit.name,
                 currentUser: req.session.currentUser,
                 habit: foundHabit,
                 id: req.params.id,
                 entries: allEntries,
-                // months: ['December', 'November', 'October', 'September']
-                // currentMonth: thisMonth,
-                // months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].splice((12 - thisMonth + 5), 4)
+                weeks: weekLabels,
             });
         });
     });
