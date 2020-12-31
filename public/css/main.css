@@ -3,8 +3,8 @@
     /* --color-dark: #12b482;
     --color-medium: #20e4a6;
     --color-highlight: rgba(255, 0, 0, 0.9); */
-    --color-dark: #097979;
-    --color-medium: #4da7a8;
+    --color-dark: #098686;
+    --color-medium: #5bc6c7;
     --color-highlight: rgba(0, 0, 0, 0.9);
     --color-grid: rgba(117, 117, 117, 0.3);
     --color-text-heading: rgba(255, 255, 255, 0.9);
@@ -260,6 +260,9 @@ li div {
 .day-heading {
     color: var(--color-text-heading);
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .cal-view {
