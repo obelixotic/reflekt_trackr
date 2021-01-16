@@ -13,7 +13,6 @@ const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODBURI;
 const app = express();
 mongoose.connection;
-//MONGODBURI=mongodb://localhost:27017/reflekt_db
 
 // DATABASE
 mongoose.connect(

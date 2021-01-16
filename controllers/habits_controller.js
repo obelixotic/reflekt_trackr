@@ -28,6 +28,7 @@ habits.get("/", (req, res) => {
     // res.send('Hello hello, I see you\'ve authenticated');
     if (req.session.currentUser) {
         // if authenticated
+        let lastDateOfEntry = Date.now(); //46 0
         let userHabits = Habit.find({
             user: req.session.currentUser.username,
         }).sort({ color: 1 });
@@ -71,7 +72,7 @@ habits.get("/", (req, res) => {
             Promise.all(promArray).then((allEntries) => {
                 //lets check if the week has changed
                 let diffInWeeks = 0;
-                let lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
+                lastDateOfEntry = allEntries[0][allEntries[0].length - 1].date;
                 // console.log(allEntries);
                 // console.log(
                 //     "lastDateOfEntry: ",
