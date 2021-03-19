@@ -91,12 +91,12 @@ habits.get("/", (req, res) => {
                     }
                     console.log("entered conditional loop: \n");
                     firstDayForEntry = addDays(lastDateOfEntry, 1); //1
-                    console.log(firstDayForEntry);
+                    // console.log(firstDayForEntry);
                     let promArray2 = [];
                     for (habit of allHabits) {
                         for (let i = 0; i < 7 * diffInWeeks; i++) {
                             let entryDate = addDays(firstDayForEntry, i);
-                            console.log(entryDate);
+                            // console.log(entryDate);
                             let prom2 = Entry.create({
                                 habit_id: habit["_id"],
                                 date: entryDate,
@@ -105,7 +105,7 @@ habits.get("/", (req, res) => {
                         }
                     }
                     Promise.all(promArray2).then((createdEntries) => {
-                        console.log(createdEntries); //the newly created 7 entries
+                        // console.log(createdEntries); //the newly created 7 entries
                         res.render("habits/index.ejs", {
                             habits: allHabits,
                             currentUser: req.session.currentUser,
@@ -183,7 +183,7 @@ habits.post("/", isAuthenticated, (req, res) => {
         // if (req.body.color == 'white') {
         //     req.body.color = 'grey';
         // }
-        console.log(req.body);
+        // console.log(req.body);
         Habit.create(req.body, (err, createdHabit) => {
             if (err) {
                 console.log(err);
@@ -198,7 +198,7 @@ habits.post("/", isAuthenticated, (req, res) => {
                 for (let i = 0; i < 7; i++) {
                     let diff = i - creationDayOfWeek;
                     let entryDate = addDays(creationDate, diff);
-                    console.log(entryDate);
+                    // console.log(entryDate);
                     let prom = Entry.create({
                         habit_id: createdHabit["_id"],
                         date: entryDate,
@@ -221,7 +221,7 @@ habits.patch("/:id/entry", isAuthenticated, (req, res) => {
     } else {
         req.body.done = false;
     }
-    console.log(req.body);
+    // console.log(req.body);
     // res.send(req.body);
     Entry.findByIdAndUpdate(
         req.params.id, { $set: { done: req.body.done } },
