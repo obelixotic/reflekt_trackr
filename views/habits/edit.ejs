@@ -8,43 +8,45 @@
 </head>
 
 <body>
-    <nav>
-        <%- include ('../partials/nav.ejs') %>
-    </nav>
-    <div class="container">
-        <div class="heading-bar">
-            <h2 class="page-heading">EDIT HABIT </h2>
-            <div class="icons">
-                <form class="add-habit" action="/habits/" method="GET">
-                    <input id="edit" type="image" alt="submit" src="/assets/home-white.svg" />
-                </form>
-                <form class="add-habit" action="/habits/<%= id %>" method="GET">
-                    <input type="image" alt="submit" src="/assets/back-curve-white.svg" />
-                </form>
+    <div class="view-container">
+        <nav>
+            <%- include ('../partials/nav.ejs') %>
+        </nav>
+        <div class="container">
+            <div class="heading-bar">
+                <h2 class="page-heading">EDIT HABIT </h2>
+                <div class="icons">
+                    <form class="add-habit" action="/habits/" method="GET">
+                        <input id="edit" type="image" alt="submit" src="/assets/home-white.svg" />
+                    </form>
+                    <form class="add-habit" action="/habits/<%= id %>" method="GET">
+                        <input type="image" alt="submit" src="/assets/back-curve-white.svg" />
+                    </form>
+                </div>
             </div>
-        </div>
-        <form class="auth-form" action="/habits/<%= id %>/?_method=PUT" method="POST">
-            <p>
-                <label for="name">Name <span style="color:red">*</span></label>
-                <input type="text" name="name" id="name" value="<%= habit.name %> " />
-                <input type="text" name="color" id="color-name" value="<%= habit.color %>" style="display:none" />
-            </p>
-            <p>
-                <div>Color (optional)</div>
-                <div class=" category-col zblack"></div>
-                <div class="category-col cyan"></div>
-                <div class="category-col green"></div>
-                <div class="category-col red"></div>
-                <div class="category-col violet"></div>
-                <div class="category-col yellow"></div>
-            </p>
-            <div class="edit-buttons">
-                <input type="submit" value="SAVE">
-        </form>
-        <form class="auth-form delete" action="/habits/<%= id %>/?_method=DELETE" method="POST">
-            <input id="delete" type="submit" value="DELETE" />
-        </form>
-        <input type="text" id="color-saved" style="display: none;" value="<%= habit.color %>">
+            <form class="auth-form" action="/habits/<%= id %>/?_method=PUT" method="POST">
+                <p>
+                    <label for="name">Name <span style="color:red">*</span></label>
+                    <input type="text" name="name" id="name" value="<%= habit.name %> " />
+                    <input type="text" name="color" id="color-name" value="<%= habit.color %>" style="display:none" />
+                </p>
+                <p>
+                    <div>Color (optional)</div>
+                    <div class=" category-col zblack"></div>
+                    <div class="category-col cyan"></div>
+                    <div class="category-col green"></div>
+                    <div class="category-col red"></div>
+                    <div class="category-col violet"></div>
+                    <div class="category-col yellow"></div>
+                </p>
+                <div class="edit-buttons">
+                    <input type="submit" value="SAVE">
+            </form>
+            <form class="auth-form delete" action="/habits/<%= id %>/?_method=DELETE" method="POST">
+                <input id="delete" type="submit" value="DELETE" />
+            </form>
+            <input type="text" id="color-saved" style="display: none;" value="<%= habit.color %>">
+            </div>
         </div>
 </body>
 

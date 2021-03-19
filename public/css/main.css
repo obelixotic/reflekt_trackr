@@ -14,7 +14,6 @@
 
 body {
     width: 100%;
-    /* max-width: 600px; */
     height: 720px;
     margin: 0;
     padding: 0;
@@ -22,6 +21,14 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text-body);
     align-self: center;
+    display: flex;
+    justify-content: center;
+}
+
+.view-container {
+    width: 70%;
+    height: 100%;
+    max-width: 600px;
 }
 
 ul {
@@ -209,8 +216,8 @@ nav {
 .container {
     height: 100%;
     width: 100%;
-    position: absolute;
-    top: 60px;
+    /* position: absolute;
+    top: 60px; */
     background-color: var(--color-bg);
 }
 
@@ -421,4 +428,10 @@ input[type="password"] {
 
 #date {
     font-size: 7px;
+}
+
+@media only screen and (max-width: 600px) {
+    .view-container {
+        width: 100%;
+    }
 }

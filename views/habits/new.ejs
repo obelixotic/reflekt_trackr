@@ -8,20 +8,21 @@
 </head>
 
 <body>
-    <nav>
-        <%- include ('../partials/nav.ejs') %>
-    </nav>
-    <div class="container">
-        <div class="heading-bar">
-            <h2 class="page-heading">CREATE NEW HABIT </h2>
-            <%- include ('../partials/back.ejs') %>
-        </div>
-        <form class="auth-form" action="/habits/" method="POST">
-            <p>
-                <label for="name">Name <span style="color:red">*</span></label>
-                <input type="text" name="name" id="name" />
-            </p>
-            <!-- <p>
+    <div class="view-container">
+        <nav>
+            <%- include ('../partials/nav.ejs') %>
+        </nav>
+        <div class="container">
+            <div class="heading-bar">
+                <h2 class="page-heading">CREATE NEW HABIT </h2>
+                <%- include ('../partials/back.ejs') %>
+            </div>
+            <form class="auth-form" action="/habits/" method="POST">
+                <p>
+                    <label for="name">Name <span style="color:red">*</span></label>
+                    <input type="text" name="name" id="name" />
+                </p>
+                <!-- <p>
                 <input type="text" name="icon" id="icon-name" value="check" style="display:none" />
                 <div>Icon (optional)</div>
                 <img class="category-icon check category-border" src="/assets/check-zblack.svg" />
@@ -29,18 +30,19 @@
                 <img class="category-icon flower" src="/assets/flower-zblack.svg" />
                 <img class="category-icon paperplane" src="/assets/paperplane-zblack.svg" />
                 <img class="category-icon danger" src="/assets/danger-zblack.svg" /> </p> -->
-            <p>
-                <input type="text" name="color" id="color-name" value="zblack" style="display:none" />
-                <div>Color / category (optional)</div>
-                <div class=" category-col zblack category-border "></div>
-                <div class="category-col cyan"></div>
-                <div class="category-col green"></div>
-                <div class="category-col red"></div>
-                <div class="category-col violet"></div>
-                <div class="category-col yellow"></div>
-            </p>
-            <input type="submit" value="CREATE ">
-        </form>
+                <p>
+                    <input type="text" name="color" id="color-name" value="zblack" style="display:none" />
+                    <div>Color / category (optional)</div>
+                    <div class=" category-col zblack category-border "></div>
+                    <div class="category-col cyan"></div>
+                    <div class="category-col green"></div>
+                    <div class="category-col red"></div>
+                    <div class="category-col violet"></div>
+                    <div class="category-col yellow"></div>
+                </p>
+                <input type="submit" value="CREATE ">
+            </form>
+        </div>
     </div>
 </body>
 

@@ -6,97 +6,99 @@
 </head>
 
 <body>
-    <nav>
-        <%- include ('../partials/nav.ejs') %>
-    </nav>
-    <div class="container">
-        <% if (currentUser) { %>
-            <div class="heading-bar">
-                <h2 class="page-heading">
-                    <% if (entries) { %> MY WEEKLY TRACKER
-                        <% } else { %> ADD HABITS
-                            <% }
-          %>
-                </h2>
-                <form class="add-habit" action="/habits/new" method="GET">
-                    <input type="image" alt="submit" src="/assets/plus-white.svg" />
-                </form>
-            </div>
-            <ul>
-                <% for (let i in habits ) { %>
-                    <% if(i==0) { %>
-                        <li class="days">
-                            <a class="day-heading">HABITS</a>
-                            <br />
-                            <!-- <div class="day-letter">S</div>
+    <div class="view-container">
+        <nav>
+            <%- include ('../partials/nav.ejs') %>
+        </nav>
+        <div class="container">
+            <% if (currentUser) { %>
+                <div class="heading-bar">
+                    <h2 class="page-heading">
+                        <% if (entries) { %> MY WEEKLY TRACKER
+                            <% } else { %> ADD HABITS
+                                <%
+            } %>
+                    </h2>
+                    <form class="add-habit" action="/habits/new" method="GET">
+                        <input type="image" alt="submit" src="/assets/plus-white.svg" />
+                    </form>
+                </div>
+                <ul>
+                    <% for (let i in habits ) { %>
+                        <% if(i==0) { %>
+                            <li class="days">
+                                <a class="day-heading">HABITS</a>
+                                <br />
+                                <!-- <div class="day-letter">S</div>
                             <div class="day-letter">M</div>
                             <div class="day-letter">T</div>
                             <div class="day-letter">W</div>
                             <div class="day-letter">T</div>
                             <div class="day-letter">F</div>
                             <div class="day-letter">S</div> -->
-                            <div class="day-letter">
-                                S<br />
-                                <span id="date"> <%=sundayDate%>/ <%=sundayMonth%> </span>
-                            </div>
-                            <div class="day-letter">
-                                M<br />
-                                <span id="date"> <%=mondayDate%>/ <%=mondayMonth%> </span>
-                            </div>
-                            <div class="day-letter">
-                                T<br />
-                                <span id="date"> <%=tuesdayDate%>/ <%=tuesdayMonth%> </span>
-                            </div>
-                            <div class="day-letter">
-                                W<br />
-                                <span id="date"> <%=wednesdayDate%>/ <%=wednesdayMonth%> </span>
-                            </div>
-                            <div class="day-letter">
-                                T<br />
-                                <span id="date"> <%=thursdayDate%>/ <%=thursdayMonth%> </span>
-                            </div>
-                            <div class="day-letter">
-                                F<br />
-                                <span id="date"> <%=fridayDate%>/ <%=fridayMonth%> </span>
-                            </div>
-                            <div class="day-letter">
-                                S<br />
-                                <span id="date"> <%=saturdayDate%>/ <%=saturdayMonth%> </span>
-                            </div>
-                        </li>
-                        <% } %>
+                                <div class="day-letter">
+                                    S<br />
+                                    <span id="date"> <%=sundayDate%>/ <%=sundayMonth%> </span>
+                                </div>
+                                <div class="day-letter">
+                                    M<br />
+                                    <span id="date"> <%=mondayDate%>/ <%=mondayMonth%> </span>
+                                </div>
+                                <div class="day-letter">
+                                    T<br />
+                                    <span id="date"> <%=tuesdayDate%>/ <%=tuesdayMonth%> </span>
+                                </div>
+                                <div class="day-letter">
+                                    W<br />
+                                    <span id="date"> <%=wednesdayDate%>/ <%=wednesdayMonth%> </span>
+                                </div>
+                                <div class="day-letter">
+                                    T<br />
+                                    <span id="date"> <%=thursdayDate%>/ <%=thursdayMonth%> </span>
+                                </div>
+                                <div class="day-letter">
+                                    F<br />
+                                    <span id="date"> <%=fridayDate%>/ <%=fridayMonth%> </span>
+                                </div>
+                                <div class="day-letter">
+                                    S<br />
+                                    <span id="date"> <%=saturdayDate%>/ <%=saturdayMonth%> </span>
+                                </div>
+                            </li>
+                            <% } %>
 
-                            <li>
-                                <a class="habit-name" href="/habits/<%=habits[i]._id%>" id="<%= habits[i].color %>">
-                                    <%= habits[i].name %>
-                                </a>
-                                <br />
-                                <% for (let j=0; j<7; j++) { %>
-                                    <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
-                                        <input type="text" value="<%= entries[i][j].done %>" name="done" style="display: none" />
-                                        <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
+                                <li>
+                                    <a class="habit-name" href="/habits/<%=habits[i]._id%>" id="<%= habits[i].color %>">
+                                        <%= habits[i].name %>
+                                    </a>
+                                    <br />
+                                    <% for (let j=0; j<7; j++) { %>
+                                        <form class="entries" action="/habits/<%= entries[i][j]._id %>/entry?_method=PATCH" method="POST">
+                                            <input type="text" value="<%= entries[i][j].done %>" name="done" style="display: none" />
+                                            <input type="image" alt="submit" src="<% if(entries[i][j].done === true) { %>
                                             /assets/check-<%= habits[i].color %>.svg
                                             
                                         <% } else { %>
                                             /assets/cross.svg" style="width:11px;padding:0 2px;opacity:0.1
                                             <% } %>" value="
                                                 <%= entries[i][j].done %>" class="btn-small" />
-                                    </form>
-                                    <% } %>
-                            </li>
-                            <% } %>
-            </ul>
-            <% } else { %>
-                <div class="heading-bar">
-                    <h2 class="landing-page-heading">YOUR PERSONAL HABIT TRACKER</h2>
-                </div>
-
-                <div class="catch-phrase-container">
-                    <div class="catch-phrase">
-                        BUILD <br /> BETTER <br /> HABITS
+                                        </form>
+                                        <% } %>
+                                </li>
+                                <% } %>
+                </ul>
+                <% } else { %>
+                    <div class="heading-bar">
+                        <h2 class="landing-page-heading">YOUR PERSONAL HABIT TRACKER</h2>
                     </div>
-                </div>
-                <% } %>
+
+                    <div class="catch-phrase-container">
+                        <div class="catch-phrase">
+                            BUILD <br /> BETTER <br /> HABITS
+                        </div>
+                    </div>
+                    <% } %>
+        </div>
     </div>
 </body>
 
